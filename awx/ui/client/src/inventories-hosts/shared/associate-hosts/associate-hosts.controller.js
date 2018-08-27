@@ -29,7 +29,7 @@
              list.name = 'associate_hosts';
              list.multiSelect = true;
              list.fields.name.ngClick = 'linkoutHost(associate_host)';
-             list.fields.name.ngClass = "{ 'host-disabled-label': !associate_host.enabled }";
+             list.fields.name.ngClass = "{ 'Inventory-Host__Label--disabled': !associate_host.enabled }";
              list.fields.name.dataHostId = "{{ associate_host.id }}";
              list.trackBy = 'associate_host.id';
              list.multiSelectPreview = {
