@@ -1,5 +1,5 @@
 // default base colors
-@at-gray-70: #707070;
+@default-interface-txt: #707070;
 @default-data-txt:      #161B1F;
 @default-icon:          #848992;
 @default-icon-hov:      #D7D7D7; // also selected button
@@ -17,7 +17,7 @@
 @default-link-hov:      #286090;
 @default-list-header-bg:#EBEBEB;
 @default-no-items-bord: #F6F6F6;
-@at-gray-70:    #707070;
+@default-stdout-txt:    #707070;
 @default-dark:          #000000; //**** Still being used
 @b7grey:                #B7B7B7;
 @egrey:                 #EEEEEE; // **** Still being used
@@ -46,17 +46,17 @@
 // buttons
 @btn-bg:                @default-bg;
 @btn-bord:              @b7grey;
-@btn-txt:               @at-gray-70;
+@btn-txt:               @default-interface-txt;
 @btn-bg-hov:            @f2grey;
 @btn-bg-sel:            @default-icon-hov;
 @btn-bord-sel:          @default-icon-hov;
 @btn-txt-sel:           @default-bg;
 
 // lists
-@list-empty-txt:        @at-gray-70;
+@list-empty-txt:        @default-interface-txt;
 @list-header-bord:      @default-bg;
 @list-header-bg:        @default-list-header-bg;
-@list-header-txt:       @at-gray-70;
+@list-header-txt:       @default-interface-txt;
 @list-header-icon:      @default-icon;
 @list-item:             @default-data-txt;
 @list-item-link:        @default-link;
@@ -73,11 +73,11 @@
 @list-actn-del-bg-hov:  @default-err;
 @list-actn-bord-hov:    @default-link;
 @list-row-select-bord:  @default-link;
-@list-pagin-text:       @at-gray-70;
+@list-pagin-text:       @default-interface-txt;
 @list-pagin-bord:       @d7grey;
 @list-pagin-bord-act:   @default-icon-hov;
 @list-pagin-bg-act:     @default-icon-hov;
-@list-title-txt:        @at-gray-70;
+@list-title-txt:        @default-interface-txt;
 @list-title-badge:      @default-icon;
 @list-srch-inpt-bg:     @default-secondary-bg;
 @list-srch-inpt-txt:    @default-data-txt;
@@ -92,24 +92,24 @@
 @list-no-items-bg:      @default-secondary-bg;
 
 // tooltups
-@tooltip-bg:            @at-gray-70;
+@tooltip-bg:            @default-interface-txt;
 @tooltip-txt:           @default-bg;
 
 // login modal
-@login-alert:           @at-gray-70;
+@login-alert:           @default-interface-txt;
 @login-backdrop:        @default-dark;
 @login-bg:              @default-bg;
 @login-header-bg:       @default-bg;
 @login-alert-error:     @default-err;
 
 // login modal notice
-@login-notice-title:    @at-gray-70;
+@login-notice-title:    @default-interface-txt;
 @login-notice-bg:       @default-no-items-bord;
 @login-notice-border:   @default-no-items-bord;
-@login-notice-text:     @at-gray-70;
+@login-notice-text:     @default-stdout-txt;
 
 // login modal third party auth
-@third-party-label:     @at-gray-70;
+@third-party-label:     @default-interface-txt;
 @third-party-btn-bg:    @default-bg;
 @third-party-btn-hov:   @default-icon-hov;
 @third-party-btn-text:  @default-icon;
@@ -117,7 +117,7 @@
 @third-party-error-hov: @default-err-hov;
 
 // forms
-@field-label:           @at-gray-70;
+@field-label:           @default-interface-txt;
 @field-input-text:      @default-data-txt;
 @field-bg:              @default-secondary-bg;
 @field-secondary-bg:    @default-secondary-bg;
@@ -131,19 +131,19 @@
 @submit-button-bg-hov:  @default-succ-hov;
 @submit-button-bg-dis:  @default-icon-hov;
 @code-mirror-gutter:    @default-no-items-bord;
-@radio-bg:              @at-gray-70;
+@radio-bg:              @default-interface-txt;
 @field-lookup-btn-icon: @default-icon;
 @field-lookup-btn-bg:   @default-bg;
 @field-lookup-btn-hov-bg:@f2grey;
 
 // footer
-@copyright-text:        @at-gray-70;
+@copyright-text:        @default-interface-txt;
 
 // main menu
 @menu-bg:               @default-bg;
 @menu-btm:              @b7grey;
 @menu-link-bg:          @default-bg;
-@menu-link:             @at-gray-70;
+@menu-link:             @default-interface-txt;
 @menu-link-sides:       @default-bg;
 @menu-link-bg-hov:      @default-tertiary-bg;
 @menu-link-sides-hov:   @default-tertiary-bg;
@@ -153,7 +153,7 @@
 
 // breadcrumbs
 @bc-bg:                 @default-bg;
-@bc-text:               @at-gray-70;
+@bc-text:               @default-interface-txt;
 @bc-border:             @b7grey;
 @bc-link-icon:          @default-icon;
 @bc-link-bg-hov:        @f2grey;
@@ -167,22 +167,22 @@
 // dashboard counts
 @db-count-succ:         @default-link;
 @db-count-fail:         @default-err;
-@db-count-label:        @at-gray-70;
+@db-count-label:        @default-interface-txt;
 @db-count-label-hov:    @default-bg;
 
 // dashboard graphs
-// @db-graph-period-label: @at-gray-70;
-@db-graph-per-dd-txt:   @at-gray-70;
+// @db-graph-period-label: @default-interface-txt;
+@db-graph-per-dd-txt:   @default-interface-txt;
 @db-graph-per-dd-icon:  @default-icon;
 // @db-graph-per-dd-bord:  @default-icon-hov;
 @db-graph-per-dd-bg:    @default-bg;
 @db-graph-per-dd-bg-hov:@default-tertiary-bg;
 @db-graph-axis:         @default-border;
-@db-graph-axis-label:   @at-gray-70;
+@db-graph-axis-label:   @default-interface-txt;
 
 // panel
 @panel-bg:              @default-bg;
 @panel-border:          @b7grey;
 
 // activity stream details modal
-@as-detail-changes-txt: @at-gray-70;
+@as-detail-changes-txt: @default-stdout-txt;
