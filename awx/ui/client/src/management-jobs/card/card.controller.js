@@ -93,7 +93,6 @@ export default
                                         .then(({data}) => {
                                             Wait('stop');
                                             $("#prompt-for-days").dialog("close");
-                                            // $("#configure-dialog").dialog('close');
                                             $state.go('output', { id: data.system_job, type: 'system' }, { reload: true });
                                         })
                                         .catch(({data, status}) => {
@@ -113,7 +112,6 @@ export default
                             $scope.removePromptForDays();
                         }
                         $scope.removePromptForDays = $scope.$on('PromptForDays', function() {
-                            // $('#configure-dialog').dialog('close');
                             $('#prompt-for-days').show();
                             $('#prompt-for-days').dialog('open');
                             Wait('stop');
