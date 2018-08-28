@@ -66,12 +66,12 @@ a:focus {
 /* Old style TB default button with grey background */
 .btn-grey {
   color: @at-gray-161b1f;
-  background-color: @d7grey;
-  border-color: @d7grey;
+  background-color: @at-gray-d7;
+  border-color: @at-gray-d7;
 }
 
 .btn-grey:hover {
-  background-color: @default-bg;
+  background-color: @at-white;
 }
 
 /* Make buttons appear to be disabled, but allow mouse events */
@@ -121,7 +121,7 @@ i:active,
 
 
 .IdleModal-remainingSeconds{
-    color: @default-err;
+    color: @at-red;
 }
 
 
@@ -138,7 +138,7 @@ textarea {
   width: 138px;
   height: 50px;
   text-align:center;
-  color: @d7grey;
+  color: @at-gray-d7;
   background-color: @black;
   border: 1px solid @grey;
   border-radius: 6px;
@@ -196,7 +196,7 @@ textarea {
   .popover-title {
       padding: 0 0 5px 0;
       background-color: @at-gray-70;
-      color: @default-bg;
+      color: @at-white;
       font-weight: 600;
       border-bottom: none;
       text-transform: uppercase;
@@ -206,7 +206,7 @@ textarea {
       min-width: 200px;
       max-width: 325px;
       background-color: @at-gray-70;
-      color: @default-bg; //white
+      color: @at-white; //white
       text-align: left;
       padding: 10px;
       font-weight: 400;
@@ -266,7 +266,7 @@ textarea {
 }
 
 hr {
-  border-color: @default-border;
+  border-color: @at-gray-d7;
 }
 
 .help {
@@ -311,19 +311,19 @@ hr {
 }
 
 .btn .caret {
-  border-top-color: @default-icon;
+  border-top-color: @at-gray-848992;
 }
 
 .btn-light {
   color: @at-gray-161b1f;
-  background-color: @d7grey;
-  border-color: @d7grey;
+  background-color: @at-gray-d7;
+  border-color: @at-gray-d7;
 }
 
 .btn-light:hover {
-  color: @d7grey;
-  background-color: @default-icon;
-  border-color: @default-icon;
+  color: @at-gray-d7;
+  background-color: @at-gray-848992;
+  border-color: @at-gray-848992;
 }
 
 /* Make a div or any element behave like pre. Use in conjunction with .mono-space */
@@ -361,7 +361,7 @@ dd {
 .ui-widget-content a.help-link,
 .ui-widget-content a.help-link:active,
 .ui-widget-content a.help-link:visited {
-  color: @default-icon;
+  color: @at-gray-848992;
   text-decoration: none;
 }
 
@@ -417,7 +417,7 @@ dd {
 
 /* Outline required fields in Red when there is an error */
   .form-control.ng-dirty.ng-invalid, .form-control.ng-dirty.ng-invalid:focus {
-      border-color: @default-err;
+      border-color: @at-red;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px rgba(255, 88, 80, 0.6);
               box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px rgba(255, 88, 80, 0.6);
@@ -425,7 +425,7 @@ dd {
 
   .form-control.ng-dirty.ng-invalid + .select2 .select2-selection,
   .form-control.ng-dirty.ng-invalid + .select2 .select2-selection:focus {
-      border-color: @default-err !important;
+      border-color: @at-red !important;
       outline: 0 !important;
       box-shadow: none !important;
   }
@@ -546,9 +546,9 @@ legend {
     font-size: 14px;
     font-weight: bold;
     background-color: @default-no-items-bord;
-    border: 1px solid @d7grey;
+    border: 1px solid @at-gray-d7;
     border-radius: 6px;
-    box-shadow: 3px 3px 4px 0 @default-icon;
+    box-shadow: 3px 3px 4px 0 @at-gray-848992;
 
     .breadcrumb {
       display: inline-block;
@@ -562,7 +562,6 @@ legend {
     .dropdown {
         display: inline-block;
         margin-right: 0;
-        paddding-right: 0;
 
         .toggle, .toggle:visited, .toggle:hover, .toggle:active {
           color: @black;
@@ -701,7 +700,7 @@ input[type="checkbox"].checkbox-no-label {
 
 .table-hover tbody tr:hover > td,
 .table-hover tbody tr:hover > th {
-  background-color: @default-bg;
+  background-color: @at-white;
 }
 
 .table-hover-inverse tbody tr:hover > td,
@@ -736,11 +735,11 @@ input[type="checkbox"].checkbox-no-label {
 .table-summary thead > tr > td,
 .table-summary tbody > tr > td,
 .table-summary tfoot > tr > td {
-  border-top: 1px solid @d7grey;
+  border-top: 1px solid @at-gray-d7;
 }
 
 .table-summary thead > tr > th {
-  border-bottom: 1px solid @d7grey;
+  border-bottom: 1px solid @at-gray-d7;
 }
 
 /* Table without row borders */
@@ -800,7 +799,7 @@ input[type="checkbox"].checkbox-no-label {
 //   .active-failures-true a:active,
 //   .job-failed,
 //   .job-error {
-//     color: @default-err;
+//     color: @at-red;
 //   }
 
 //   .icon-failures-true a:hover {
@@ -809,7 +808,7 @@ input[type="checkbox"].checkbox-no-label {
 
 //   .job-failures-true {
 //     padding-top: 5px;
-//     color: @default-err;
+//     color: @at-red;
 //   }
 
 //   .job-event-status,
@@ -946,12 +945,12 @@ input[type="checkbox"].checkbox-no-label {
 /* Inventory job status badge */
 //   .failures-true {
 //     background-color: @red;
-//     color: @default-bg;
+//     color: @at-white;
 //   }
 
 //   .failures-false {
 //     background-color: @green;
-//     color: @default-bg;
+//     color: @at-white;
 //   }
 
 /* Cloud inventory status. i.e. inventory_source.status values */
@@ -1223,7 +1222,7 @@ a.btn-disabled:hover {
 }
 
 .list-header .icon-sort {
-  color: @default-icon;
+  color: @at-gray-848992;
 }
 
 .list-header .icon-sort-down,
@@ -1303,7 +1302,7 @@ tr td button i {
         word-wrap: break-word;
     }
     .alert-danger {
-        background-color: @default-bg;
+        background-color: @at-white;
         border: none;
         color: @at-gray-70;
       }
@@ -1337,8 +1336,8 @@ tr td button i {
       }
 
       &:disabled {
-        background-color: @default-succ-disabled;
-        border-color: @default-succ-disabled;
+        background-color: @at-gray-d7;
+        border-color: @at-gray-d7;
       }
     }
 
@@ -1713,14 +1712,14 @@ tr td button i {
 
 .select2-container--default .select2-selection--single {
     background-color: @fcgrey;
-    border: 1px solid @d7grey;
+    border: 1px solid @at-gray-d7;
     border-radius: 4px;
 }
 
 .select2-container--default .select2-selection--multiple {
     background-color: @field-secondary-bg;
     border-radius: 4px;
-    border: 1px solid @d7grey;
+    border: 1px solid @at-gray-d7;
     cursor: text;
     max-height: 135px;
     overflow-y: auto;
@@ -1735,8 +1734,8 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
 }
 
 .btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
-    background-color: @d7grey;
-    color: @default-bg;
+    background-color: @at-gray-d7;
+    color: @at-white;
     border: 0;
 }
 
@@ -1779,7 +1778,7 @@ a:hover {
     padding-right: 10px;
     border-right-width: 0px;
     background-color: @default-link;
-    color: @default-bg;
+    color: @at-white;
     border-radius: 5px;
     line-height: 21px;
     font-size: 13px;
@@ -1795,7 +1794,7 @@ a:hover {
     font-weight: bold;
     margin-right: 8px !important;
     padding: 0 6px;
-    color: @default-bg !important;
+    color: @at-white !important;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: @default-link;
@@ -1808,7 +1807,7 @@ a:hover {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    background-color: @default-err;
+    background-color: @at-red;
 }
 
 .dropdown-menu>li>a {
@@ -1826,7 +1825,7 @@ a:hover {
 .WorkflowBadge{
     background-color: @b7grey;
     border-radius: 10px;
-    color: @default-bg;
+    color: @at-white;
     display: inline-block;
     font-family: 'Open Sans';
     font-weight: bold;
@@ -1871,7 +1870,7 @@ html input[disabled] {
 }
 
 .btn-default {
-  background: @default-bg;
+  background: @at-white;
   border-color: @b7grey;
   color: @at-gray-70;
 }
@@ -1918,7 +1917,7 @@ input[disabled].ui-spinner-input {
 }
 
 .ui-dialog .ui-dialog-content {
-    background: @default-bg;
+    background: @at-white;
 }
 
 html { height: 100%; }
@@ -1927,7 +1926,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: @at-gray-161b1f;
-    background-color: @default-secondary-bg;
+    background-color: @at-gray-fc;
 }
 
 .container-fluid {

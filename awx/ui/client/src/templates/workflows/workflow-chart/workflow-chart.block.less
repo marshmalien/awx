@@ -11,11 +11,11 @@
 }
 
 .node .removeCircle {
-    fill: @default-err;
+    fill: @at-red;
 }
 
 .removeCircle.removeHovering {
-    fill: @default-err-hov;
+    fill: @at-red-hover;
 }
 
 .node {
@@ -28,12 +28,12 @@
 }
 
 .WorkflowChart-startText {
-    fill: @default-bg;
+    fill: @at-white;
     cursor: default;
 }
 
 .node .rect {
-    fill: @default-secondary-bg;
+    fill: @at-gray-fc;
 }
 
 .rect.placeholder {
@@ -41,7 +41,7 @@
 }
 
 .node .transparentRect {
-    fill: @default-bg;
+    fill: @at-white;
     opacity: 0;
 }
 
@@ -70,24 +70,24 @@
 
 .WorkflowResults-rightSide .WorkflowChart-svg {
     background-color: @f6grey;
-    border: 1px solid @d7grey;
+    border: 1px solid @at-gray-d7;
     border-top: 0px;
     border-bottom-right-radius: 5px;
 }
 .WorkflowChart-nodeTypeCircle {
-    fill: @default-icon;
+    fill: @at-gray-848992;
 }
 .WorkflowChart-nodeTypeLetter {
-    fill: @default-bg;
+    fill: @at-white;
 }
 .workflowChart-nodeStatus--running {
-    fill: @default-icon;
+    fill: @at-gray-848992;
 }
 .workflowChart-nodeStatus--success {
     fill: @default-succ;
 }
 .workflowChart-nodeStatus--failed, .workflowChart-nodeStatus--canceled {
-    fill: @default-err;
+    fill: @at-red;
 }
 .WorkflowChart-detailsLink {
     fill: @default-link;
@@ -102,7 +102,7 @@
     color: @at-gray-70;
 }
 .WorkflowChart-conflictIcon {
-    color: @default-err;
+    color: @at-red;
 }
 .WorkflowChart-conflictText {
     width: 90px;
@@ -113,7 +113,7 @@
 }
 .WorkflowChart-elapsedHolder {
     background-color: @b7grey;
-    color: @default-bg;
+    color: @at-white;
     height: 13px;
     width: 39px;
     padding: 1px 3px;

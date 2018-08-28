@@ -4,7 +4,7 @@
     cursor: not-allowed;
     border-color: @default-link !important;
     .ScheduleToggle-switch  {
-        background-color: @d7grey !important;
+        background-color: @at-gray-d7 !important;
         cursor: not-allowed;
     }
 }
@@ -22,9 +22,9 @@
     &.ScheduleToggle--disabled  {
         cursor: not-allowed;
         background-color: none;
-        border-color: @d7grey !important;
+        border-color: @at-gray-d7 !important;
         .ScheduleToggle-switch  {
-            background-color: @d7grey !important;
+            background-color: @at-gray-d7 !important;
             cursor: not-allowed;
         }
     }
@@ -32,7 +32,7 @@
 
 .ScheduleToggle-switch {
     color: @default-link;
-    background-color: @default-bg;
+    background-color: @at-white;
     border-left: 1px solid @default-link;
     text-align: center;
     text-transform: uppercase;
@@ -49,13 +49,13 @@
 
 .ScheduleToggle.is-on {
     border-color: @default-link;
-    background-color: @default-bg;
+    background-color: @at-white;
     justify-content: flex-start;
 }
 
 .ScheduleToggle-switch.is-on {
     background-color: @default-link;
-    color: @default-bg;
+    color: @at-white;
     border-left: 0;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -65,7 +65,7 @@
 }
 
 .ScheduleToggle-switch:hover {
-    background-color: @default-tertiary-bg;
+    background-color: @at-gray-fa;
 }
 
 .ScheduleToggle.is-on:hover {

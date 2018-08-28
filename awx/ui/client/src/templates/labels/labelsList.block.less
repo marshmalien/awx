@@ -43,7 +43,7 @@
 }
 
 .LabelList-tag--deletable, .JobSubmission-previewTag--deletable, .Prompt-previewTag--deletable {
-    color: @default-bg;
+    color: @at-white;
     background-color: @default-link;
     margin-right: 0px;
     border-top-right-radius: 0px;
@@ -56,7 +56,7 @@
     background-color: @default-link;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    color: @default-bg;
+    color: @at-white;
     padding: 0 5px;
     margin: 3px 0px;
     align-items: center;
@@ -67,7 +67,7 @@
 
 .LabelList-tagDelete {
     font-size: 13px;
-    color: @default-bg;
+    color: @at-white;
 }
 
 .LabelList-name {
@@ -81,12 +81,12 @@
 }
 
 .LabelList-deleteContainer:hover, .JobSubmission-previewTagContainerDelete:hover, .Prompt-previewTagContainerDelete:hover {
-    border-color: @default-err;
-    background-color: @default-err;
+    border-color: @at-red;
+    background-color: @at-red;
 }
 
 .LabelList-deleteContainer:hover > .LabelList-tagDelete, .JobSubmission-previewTagContainerDelete:hover > .JobSubmission-previewTagContainerTagDelete, .Prompt-previewTagContainerDelete:hover > .Prompt-previewTagContainerTagDelete {
-    color: @default-bg;
+    color: @at-white;
 }
 
 .LabelList-lookupTags {
@@ -103,8 +103,8 @@
     cursor: not-allowed;
     background-color: @default-list-header-bg;
     .LabelList-tag {
-        color: @default-bg;
-        background-color: @default-icon;
+        color: @at-white;
+        background-color: @at-gray-848992;
     }
 }
 
