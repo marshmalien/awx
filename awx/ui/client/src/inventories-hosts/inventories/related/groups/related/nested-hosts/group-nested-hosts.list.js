@@ -56,7 +56,7 @@ export default ['i18n', function(i18n) {
                 key: true,
                 label: i18n._('Hosts'),
                 uiSref: "inventories.edit.hosts.edit({host_id: nested_host.id})",
-                ngClass: "{ 'host-disabled-label': !nested_host.enabled }",
+                ngClass: "{ 'Inventory-Host__Label--disabled': !nested_host.enabled }",
                 columnClass: 'col-lg-6 col-md-8 col-sm-8 col-xs-7',
                 dataHostId: "{{ nested_host.id }}",
                 dataType: "nested_host",
