@@ -84,11 +84,11 @@ a:focus {
 
 /* Bring primary (blue) buttons in line with link colors */
 .btn-primary {
-   background-color: @default-link;
+   background-color: @at-blue;
 }
 
 .btn-primary:hover {
-   background-color: @default-link-hov;
+   background-color: @at-blue-hover;
 }
 
 /* List Actions column */
@@ -178,7 +178,7 @@ textarea {
 
       .table>tbody>tr>td {
           padding-left: 0;
-          border-top: 1px solid @b7grey;
+          border-top: 1px solid @at-gray-b7;
       }
   }
   h3.popover-title, .popover-content, .popover-content blockquote, .popover-content a {
@@ -213,14 +213,14 @@ textarea {
 
       code {
           color: @at-gray-161b1f;
-          background-color: @default-white-button-bord;
+          background-color: @at-gray-e1;
           line-height: 18px;
       }
 
       a {
-          color: @default-warning;
+          color: @at-orange;
           &:hover {
-              color: @default-warning-hov;
+              color: @at-orange-hover;
           }
       }
 
@@ -431,12 +431,12 @@ dd {
   }
 
   .form-control.ng-dirty.ng-pristine {
-      border-color: @b7grey;
+      border-color: @at-gray-b7;
       box-shadow: none;
   }
 
   .form-control.ng-dirty.ng-pristine:focus {
-      border-color: @default-link;
+      border-color: @at-blue;
   }
 /* For some reason TB 3 RC1 does not provide an input-mini */
 
@@ -545,7 +545,7 @@ legend {
     margin-bottom: 15px;
     font-size: 14px;
     font-weight: bold;
-    background-color: @default-no-items-bord;
+    background-color: @at-gray-f6;
     border: 1px solid @at-gray-d7;
     border-radius: 6px;
     box-shadow: 3px 3px 4px 0 @at-gray-848992;
@@ -1051,11 +1051,11 @@ input[type="checkbox"].checkbox-no-label {
 /* end */
 
   .field-success {
-    color: @default-succ;
+    color: @at-green;
   }
 
   .field-success input {
-    border-color: @default-succ;
+    border-color: @at-green;
   }
 
   .field-failure {
@@ -1325,14 +1325,14 @@ tr td button i {
 
     .btn.btn-primary {
       text-transform: uppercase;
-      background-color: @default-succ;
-      border-color: @default-succ;
+      background-color: @at-green;
+      border-color: @at-green;
       padding: 5px 15px;
       cursor: pointer;
 
       &:hover {
-        background-color: @default-succ-hov;
-        border-color: @default-succ-hov;
+        background-color: @at-green-hover;
+        border-color: @at-green-hover;
       }
 
       &:disabled {
@@ -1582,7 +1582,7 @@ tr td button i {
 }
 
 .stdout-panel-body {
-    background-color: @default-list-header-bg;
+    background-color: @at-gray-eb;
 }
 
 .job-stdout-panel {
@@ -1645,8 +1645,8 @@ tr td button i {
 }
 
 .form-control {
-    border-color: @b7grey;
-    background-color: @fcgrey;
+    border-color: @at-gray-b7;
+    background-color: @at-gray-fc;
     color: @at-gray-161b1f;
     transition: border-color 0.3s;
     box-shadow: none;
@@ -1655,8 +1655,8 @@ tr td button i {
 }
 
 .form-control + .select2 .select2-selection {
-    border-color: @b7grey !important;
-    background-color: @fcgrey !important;
+    border-color: @at-gray-b7 !important;
+    background-color: @at-gray-fc !important;
     color: @at-gray-161b1f !important;
     transition: border-color 0.3s !important;
     box-shadow: none !important;
@@ -1668,17 +1668,17 @@ tr td button i {
 }
 
 .form-control + .select2-container--disabled .select2-selection {
-  background-color: @ebgrey !important;
+  background-color: @at-gray-eb !important;
 }
 
 .form-control:active, .form-control:focus {
     box-shadow: none;
-    border-color: @default-link;
+    border-color: @at-blue;
 }
 
 .form-control:active + .select2 .select2-selection, .form-control:focus + .select2 .select2-selection {
     box-shadow: none !important;
-    border-color: @default-link !important;
+    border-color: @at-blue !important;
 }
 
 .form-control.ng-dirty.ng-invalid, .form-control.ng-dirty.ng-invalid:focus {
@@ -1706,12 +1706,12 @@ tr td button i {
 .select2-container--disabled,.select2-container--disabled  .select2-selection--single,.select2-container--disabled .select2-selection--multiple {
     cursor: not-allowed;
     opacity: 100;
-    background-color: @ebgrey;
+    background-color: @at-gray-eb;
     border-radius: 5px;
 }
 
 .select2-container--default .select2-selection--single {
-    background-color: @fcgrey;
+    background-color: @at-gray-fc;
     border: 1px solid @at-gray-d7;
     border-radius: 4px;
 }
@@ -1740,19 +1740,19 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-    border-color: @default-succ;
+    border-color: @at-green;
 }
 
 a {
-    color: @default-link;
+    color: @at-blue;
 }
 
 a:hover {
-    color: @default-link-hov;
+    color: @at-blue-hover;
 }
 
 .form-control:active, .form-control:focus {
-    border-color: @default-link;
+    border-color: @at-blue;
 }
 
 .nv-axislabel {
@@ -1777,7 +1777,7 @@ a:hover {
     border-top-width: 0px;
     padding-right: 10px;
     border-right-width: 0px;
-    background-color: @default-link;
+    background-color: @at-blue;
     color: @at-white;
     border-radius: 5px;
     line-height: 21px;
@@ -1797,7 +1797,7 @@ a:hover {
     color: @at-white !important;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    background-color: @default-link;
+    background-color: @at-blue;
 }
 
 .select2-selection {
@@ -1823,7 +1823,7 @@ a:hover {
 }
 
 .WorkflowBadge{
-    background-color: @b7grey;
+    background-color: @at-gray-b7;
     border-radius: 10px;
     color: @at-white;
     display: inline-block;
@@ -1848,13 +1848,13 @@ html input[disabled] {
 
 .CodeMirror--disabled .CodeMirror.cm-s-default,
 .CodeMirror--disabled .CodeMirror-line {
-    background-color: @default-no-items-bord;
+    background-color: @at-gray-f6;
 }
 
 .CodeMirror--disabled .CodeMirror-gutter.CodeMirror-lint-markers,
 .CodeMirror--disabled .CodeMirror-gutter.CodeMirror-linenumbers {
-    background-color: @default-list-header-bg;
-    color: @b7grey;
+    background-color: @at-gray-eb;
+    color: @at-gray-b7;
 }
 
 .CodeMirror--disabled .CodeMirror-lines {
@@ -1871,13 +1871,13 @@ html input[disabled] {
 
 .btn-default {
   background: @at-white;
-  border-color: @b7grey;
+  border-color: @at-gray-b7;
   color: @at-gray-70;
 }
 
 .select2-container--disabled .select2-selection,
 .select2-container--disabled .select2-arrow {
-    background-color: @ebgrey;
+    background-color: @at-gray-eb;
 }
 
 .btn.disabled,.btn[disabled],fieldset[disabled] .bt {
@@ -1886,11 +1886,11 @@ html input[disabled] {
 
 .ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled {
     opacity: 1;
-    background-color: @ebgrey;
+    background-color: @at-gray-eb;
 }
 
 input[disabled].ui-spinner-input {
-  background-color: @ebgrey;
+  background-color: @at-gray-eb;
 }
 
 .CodeMirror-scroll {
@@ -1907,12 +1907,12 @@ input[disabled].ui-spinner-input {
 }
 
 .btn-default {
-    border-color: @b7grey;
+    border-color: @at-gray-b7;
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-    background-color: @f2grey;
-    border-color: @b7grey;
+    background-color: @at-gray-f2;
+    border-color: @at-gray-b7;
     color: @at-gray-70;
 }
 

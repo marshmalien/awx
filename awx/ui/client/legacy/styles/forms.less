@@ -63,7 +63,7 @@
 .Form-title--is_ldap_user,
 .Form-title--is_external_account,
 .Form-title--roleType {
-    background-color: @default-list-header-bg;
+    background-color: @at-gray-eb;
     border-radius: 5px;
     color: @at-gray-70;
     font-size: 10px;
@@ -112,10 +112,10 @@
 }
 
 .Form-tab {
-    color: @btn-txt;
-    background-color: @btn-bg;
+    color: @at-gray-70;
+    background-color: @at-white;
     font-size: 12px;
-    border: 1px solid @b7grey;
+    border: 1px solid @at-gray-b7;
     height: 30px;
     border-radius: 5px;
     margin-right: 20px;
@@ -136,23 +136,23 @@
 }
 
 .Form-tab:hover {
-    color: @btn-txt;
-    background-color: @btn-bg-hov;
+    color: @at-gray-70;
+    background-color: @at-gray-f2;
     cursor: pointer;
 }
 
 .Form-tab:active {
-    color: @btn-txt-sel;
-    background-color: @btn-bg-sel;
+    color: @at-white;
+    background-color: @at-gray-d7;
     cursor: pointer;
 }
 
 .Form-tab:focus {
-    color: @btn-txt-sel;
+    color: @at-white;
 }
 
 .Form-tab.is-selected {
-    color: @btn-txt-sel;
+    color: @at-white;
     background-color: @at-gray-848992;
     border-color: @at-gray-848992;
 }
@@ -162,8 +162,8 @@
 }
 
 .Form-tab--disabled:hover {
-    color: @btn-txt;
-    background-color: @btn-bg;
+    color: @at-gray-70;
+    background-color: @at-white;
     cursor:not-allowed!important;
 }
 
@@ -202,8 +202,8 @@
 
 .Form-formGroup {
     input.form-control {
-       background-color: @fcgrey;
-       border-color: @b7grey;
+       background-color: @at-gray-fc;
+       border-color: @at-gray-b7;
        border-radius: 5px;
        height: auto;
        min-height: 30px;
@@ -211,8 +211,8 @@
     }
 
     input.form-control[disabled], input.form-control[readonly], fieldset[disabled] input.form-control {
-        border-color: @b7grey;
-        background-color: @ebgrey;
+        border-color: @at-gray-b7;
+        background-color: @at-gray-eb;
     }
 }
 
@@ -255,7 +255,7 @@
     left: -20px;
     position: absolute;
     width: 5px;
-    background-color: @b7grey;
+    background-color: @at-gray-b7;
     height: 100%;
 }
 
@@ -314,18 +314,18 @@
 }
 
 .Button-primary--hollow {
-    border: 1px solid @default-link;
-    color: @default-link;
+    border: 1px solid @at-blue;
+    color: @at-blue;
     background: @at-white;
 }
 .Button-primary--hollow:hover {
-    color: @default-link-hov;
-    border: 1px solid @default-link-hov;
+    color: @at-blue-hover;
+    border: 1px solid @at-blue-hover;
 }
 
 .ui-spinner {
     height: 30px;
-    background-color: @fcgrey !important;
+    background-color: @at-gray-fc !important;
     border-radius: 5px;
     border:1px solid @field-border !important;
     color: @field-input-text;
@@ -334,7 +334,7 @@
 
 .ui-spinner-input {
     color: @field-input-text;
-    background-color: @fcgrey;
+    background-color: @at-gray-fc;
 }
 
 .ui-spinner-input:focus {
@@ -378,7 +378,7 @@
 }
 
 .select2-container--disabled .select2-selection__arrow {
-    background-color: @ebgrey !important;
+    background-color: @at-gray-eb !important;
 }
 
 .select2-results__option {
@@ -390,7 +390,7 @@
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: @default-white-button-bord !important;
+    background-color: @at-gray-e1 !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
@@ -432,13 +432,13 @@
     padding-left: 7px;
     padding-right: 7px;
     background-color: @at-white;
-    border:1px solid @b7grey;
+    border:1px solid @at-gray-b7;
 }
 
 .Form-passwordButton:hover {
     cursor: pointer;
-    background-color: @f2grey;
-    border: 1px solid @b7grey;
+    background-color: @at-gray-f2;
+    border: 1px solid @at-gray-b7;
     color: @field-lookup-btn-icon;
 }
 
@@ -500,7 +500,7 @@ input[type='radio']:focus {
 }
 
 input[type='radio']:hover {
-  box-shadow:0 0 5px 0px @btn-bg-hov inset;
+  box-shadow:0 0 5px 0px @at-gray-f2 inset;
 }
 
 input[type='radio']:before {
@@ -646,7 +646,7 @@ input[type='radio']:checked:before {
 
 .Form-cancelButton {
     background-color: @at-white;
-    color: @btn-txt;
+    color: @at-gray-70;
     text-transform: uppercase;
     border-radius: 5px;
     border: 1px solid @field-border;
@@ -657,12 +657,12 @@ input[type='radio']:checked:before {
 }
 
 .Form-cancelButton:hover {
-    background-color: @btn-bg-hov;
-    color: @btn-txt;
+    background-color: @at-gray-f2;
+    color: @at-gray-70;
 }
 
 .Form-primaryButton {
-    background-color: @default-link;
+    background-color: @at-blue;
     color: @at-white;
     text-transform: uppercase;
     padding-left:15px;
@@ -673,12 +673,12 @@ input[type='radio']:checked:before {
 }
 
 .Form-primaryButton:hover {
-    background-color: @default-link-hov;
+    background-color: @at-blue-hover;
     color: @at-white;
 }
 
 .Form-primaryButton.Form-tab--disabled:hover {
-    background-color: @default-link;
+    background-color: @at-blue;
 }
 
 .Form-primaryButton--noMargin {
@@ -750,8 +750,8 @@ input[type='radio']:checked:before {
     width: 100%;
     height: 100px;
     border-radius: 5px;
-    border: 1px solid @default-no-items-bord;
-    background-color: @default-no-items-bord;
+    border: 1px solid @at-gray-f6;
+    background-color: @at-gray-f6;
     color: @at-gray-848992;
     text-transform: uppercase;
 }
@@ -772,21 +772,21 @@ input[type='radio']:checked:before {
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: @b7grey;
+  color: @at-gray-b7;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: @b7grey;
+  color: @at-gray-b7;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: @b7grey;
+  color: @at-gray-b7;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: @b7grey;
+  color: @at-gray-b7;
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    border-color: @b7grey;
-    background-color: @ebgrey;
+    border-color: @at-gray-b7;
+    background-color: @at-gray-eb;
 }
 
 .Form-checkboxRow {
