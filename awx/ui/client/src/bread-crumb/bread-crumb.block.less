@@ -3,12 +3,12 @@
 .BreadCrumb {
     padding: 0;
     display: flex;
-    background-color: @bc-bg;
+    background-color: @at-white;
     width: 100%;
     z-index: 1039;
     margin-top: 60px;
     height: 40px;
-    border-bottom: 1px solid @bc-border;
+    border-bottom: 1px solid @at-gray-b7;
 }
 .BreadCrumb.is-loggedOut {
     opacity: 0;
@@ -19,7 +19,7 @@
 }
 .BreadCrumb-menuLink {
     width: 58px;
-    color: @bc-link-icon;
+    color: @at-gray-848992;
     flex: initial;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@
     cursor: pointer;
 }
 .BreadCrumb-menuLink:hover {
-    color: @bc-link-icon-focus;
+    color: @at-blue;
 }
 .BreadCrumb-menuLink {
     .BreadCrumb-menuLinkImage.fa-refresh {
@@ -38,7 +38,7 @@
 }
 .BreadCrumb-menuLinkImage {
     font-size: 18px;
-    color: @bc-link-icon;
+    color: @at-gray-848992;
     flex: initial;
 
     &:hover {
@@ -46,10 +46,10 @@
     }
 }
 .BreadCrumb-menuLink.BreadCrumb-menuLinkActive {
-    color: @bc-link-icon-focus;
+    color: @at-blue;
 
     .BreadCrumb-menuLinkImage {
-        color: @bc-link-icon-focus;
+        color: @at-blue;
 
         &:hover {
             color: @at-blue-hover
