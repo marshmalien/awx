@@ -51,13 +51,13 @@ blockquote {
 }
 
 a {
-  color: @blue-link;
+  color: @at-blue;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: @blue-dark;
+  color: @at-blue-hover;
   text-decoration: none;
 }
 .btn{
@@ -103,7 +103,7 @@ a:focus {
     cursor: pointer;
   }
   .dropdown .caret {
-    border-top-color: @blue-link;
+    border-top-color: @at-blue;
   }
 }
 
@@ -139,8 +139,8 @@ textarea {
   height: 50px;
   text-align:center;
   color: @at-gray-d7;
-  background-color: @black;
-  border: 1px solid @grey;
+  background-color: @at-black;
+  border: 1px solid @at-gray-848992;
   border-radius: 6px;
   padding-top: 10px;
 
@@ -167,7 +167,7 @@ textarea {
   top: 0;
   left: 0;
   z-index: 1080;
-  background-color: @black;
+  background-color: @at-black;
   opacity: 0;
 }
 
@@ -251,10 +251,10 @@ textarea {
       font-size: 12px;
       margin-top: 10px;
       text-align: right;
-      color: @grey;
+      color: @at-gray-848992;
       .key {
-          color: @white;
-          background-color: @grey;
+          color: @at-white;
+          background-color: @at-gray-848992;
           padding: 0 1px 1px 1px;
           border-radius: 3px;
       }
@@ -292,7 +292,7 @@ hr {
   }
 
   .panel-default>.panel-heading .collapse-help-icon {
-    color: @grey;
+    color: @at-gray-848992;
   }
 
   .collapsible-help {
@@ -403,7 +403,7 @@ dd {
 
 .label-hint-text {
    font-weight: normal;
-   color: @grey;
+   color: @at-gray-848992;
 }
 .label-hint-text:before {
     /* for a line break before hintText */
@@ -450,7 +450,7 @@ dd {
 .error {
   font-size: 12px;
   line-height: normal;
-  color: @red;
+  color: @at-red;
 }
 
 // .xsmall {
@@ -507,7 +507,7 @@ legend {
 
 // .accordion-heading {
 //   font-weight: bold;
-//   color: @blue-link;
+//   color: @at-blue;
 // }
 
 // .accordion-heading i {
@@ -564,11 +564,11 @@ legend {
         margin-right: 0;
 
         .toggle, .toggle:visited, .toggle:hover, .toggle:active {
-          color: @black;
+          color: @at-black;
         }
 
         li a.active {
-           color: @grey;
+           color: @at-gray-848992;
         }
 
         .crumb-icon {
@@ -607,7 +607,7 @@ legend {
 // }
 
 .breadcrumb .active {
-  color: @black;
+  color: @at-black;
 }
 
 .nav-tabs > li > a {
@@ -675,10 +675,10 @@ input[type="checkbox"].checkbox-no-label {
         margin: 0;
     }
     /*.list-wrapper {
-        background-color: @well;
+        background-color: @at-gray-f6;
         padding: 10px;
         border-radius: 4px;
-        border: 1px solid @well-border;
+        border: 1px solid @at-gray-f6-border;
     }*/
     .ui-accordion-content {
         padding-left: 15px;
@@ -705,7 +705,7 @@ input[type="checkbox"].checkbox-no-label {
 
 .table-hover-inverse tbody tr:hover > td,
 .table-hover-inverse tbody tr:hover > th {
-  background-color: @active-color;
+  background-color: @at-gray-fc;
 }
 
 .table > thead > tr > td.success,
@@ -720,13 +720,13 @@ input[type="checkbox"].checkbox-no-label {
 .table > thead > tr.success > th,
 .table > tbody > tr.success > th,
 .table > tfoot > tr.success > th {
-  background-color: @active-color;
+  background-color: @at-gray-fc;
 }
 .table-hover > tbody > tr > td.success:hover,
 .table-hover > tbody > tr > th.success:hover,
 .table-hover > tbody > tr.success:hover > td,
 .table-hover > tbody > tr.success:hover > th {
-  background-color: @active-color;
+  background-color: @at-gray-fc;
 }
 
 .table-summary thead > tr > th,
@@ -785,7 +785,7 @@ input[type="checkbox"].checkbox-no-label {
 /* Table info rows */
 
 .loading-info {
-    color: @grey-txt;
+    color: @at-gray-70;
     font-weight: normal;
     padding: 15px 0;
 }
@@ -803,7 +803,7 @@ input[type="checkbox"].checkbox-no-label {
 //   }
 
 //   .icon-failures-true a:hover {
-//     color: @red;
+//     color: @at-red;
 //   }
 
 //   .job-failures-true {
@@ -821,7 +821,7 @@ input[type="checkbox"].checkbox-no-label {
 //   .license-valid,
 //   .job-success,
 //   .job-successful {
-//       color: @green;
+//       color: @at-green;
 //   }
 
   .icon-host-all:before,
@@ -861,11 +861,11 @@ input[type="checkbox"].checkbox-no-label {
   .icon-job-successful,
   .icon-job-ok,
   .icon-job-OK {
-      color: @green;
+      color: @at-green;
   }
 
   .icon-job-skipped {
-      color: @skipped;
+      color: @default-cyan;
   }
 
   .icon-job-running {
@@ -874,7 +874,7 @@ input[type="checkbox"].checkbox-no-label {
 
   .icon-job-changed,
   .job-changed {
-      color: @changed;
+      color: @at-orange;
   }
 
   .icon-host-failed,
@@ -883,7 +883,7 @@ input[type="checkbox"].checkbox-no-label {
   .icon-job-failed,
   .icon-job-stdout-download-tooltip,
   .icon-job-canceled {
-      color: @red;
+      color: @at-red;
   }
 
   .icon-host-all {
@@ -891,7 +891,7 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .icon-job-unreachable {
-      color: @unreachable;
+      color: @at-red-bright;
   }
 
   .icon-job-none,
@@ -899,7 +899,7 @@ input[type="checkbox"].checkbox-no-label {
   .icon-job-waiting,
   .icon-job-new,
   .icon-job-no-matching-hosts {
-      color: @grey;
+      color: @at-gray-848992;
       opacity: 0.45;
   }
 
@@ -913,15 +913,15 @@ input[type="checkbox"].checkbox-no-label {
 
   .icon-socket-ok:before {
       content: "\f111";
-      color: @green;
+      color: @at-green;
   }
   .icon-socket-error:before {
       content: "\f111";
-      color: @red;
+      color: @at-red;
   }
   .icon-socket-connecting:before {
       content: "\f042";
-      color: @warning;
+      color: @at-orange;
   }
 
 /* job_events page */
@@ -944,12 +944,12 @@ input[type="checkbox"].checkbox-no-label {
 
 /* Inventory job status badge */
 //   .failures-true {
-//     background-color: @red;
+//     background-color: @at-red;
 //     color: @at-white;
 //   }
 
 //   .failures-false {
-//     background-color: @green;
+//     background-color: @at-green;
 //     color: @at-white;
 //   }
 
@@ -976,7 +976,7 @@ input[type="checkbox"].checkbox-no-label {
   .icon-cloud-never,
   a.icon-cloud-na:hover,
   a.icon-cloud-never:hover {
-    color: @grey;
+    color: @at-gray-848992;
   }
 
   .icon-cloud-updating,
@@ -985,14 +985,14 @@ input[type="checkbox"].checkbox-no-label {
   .icon-cloud-pending,
   a.icon-cloud-updating:hover,
   a.icon-cloud-successful:hover {
-    color: @green;
+    color: @at-green;
   }
 
   .icon-cloud-failed,
   .icon-cloud-error,
   .icon-cloud-canceled,
   a.icon-cloud-failed:hover {
-    color: @red;
+    color: @at-red;
   }
 
   .icon-cloud-updating,
@@ -1006,7 +1006,7 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .icon-enabled-true {
-    color: @green;
+    color: @at-green;
     width: 14px;
 
   }
@@ -1015,7 +1015,7 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .icon-enabled-false{
-    color: @red;
+    color: @at-red;
     width: 14px;
   }
 
@@ -1029,24 +1029,24 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .error-color {
-      color:@red;
+      color:@at-red;
   }
 
   .error-border {
-      border-color:@red;
+      border-color:@at-red;
   }
 
   .connecting-color {
-      color: @warning;
+      color: @at-orange;
   }
 
   .ok-color,
   .icon-cloud-true {
-      color: @green;
+      color: @at-green;
   }
 
   .icon-cloud-false {
-    color: @grey;
+    color: @at-gray-848992;
   }
 /* end */
 
@@ -1059,11 +1059,11 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .field-failure {
-    color: @red;
+    color: @at-red;
   }
 
   .field-failure input {
-    border-color: @red;
+    border-color: @at-red;
   }
 
   .field-badge {
@@ -1073,7 +1073,7 @@ input[type="checkbox"].checkbox-no-label {
 
   .license-warning,
   .license-demo {
-    color: @warning;
+    color: @at-orange;
   }
 
   .job-detail-status {
@@ -1093,7 +1093,7 @@ input[type="checkbox"].checkbox-no-label {
   }
 
   .child-event a {
-    color: @black;
+    color: @at-black;
     cursor: default;
   }
   /* Padding levels used on job events and inventory groups */
@@ -1122,7 +1122,7 @@ input[type="checkbox"].checkbox-no-label {
 
   .selected {
     font-weight: bold;
-    color: @blue-dark;
+    color: @at-blue-hover;
   }
 
   .draggable-clone {
@@ -1135,25 +1135,25 @@ input[type="checkbox"].checkbox-no-label {
       .help-link,
       .help-link:active,
       .help-link:visited {
-          color: @blue-link;
+          color: @at-blue;
       }
 
       .help-link:hover {
-          color: @blue-dark;
+          color: @at-blue-hover;
       }
   }
 
 
  .btn-danger {
-     background-color: @red;
-     border-color: @red-focus;
+     background-color: @at-red;
+     border-color: @at-red-hover;
  }
 
  .btn-danger:hover,
  .btn-danger:focus,
  .btn-danger:active {
-     border-color: @red-focus;
-     background-color: @red-focus;
+     border-color: @at-red-hover;
+     background-color: @at-red-hover;
  }
 
 // ad hoc permission checkbox
@@ -1162,11 +1162,11 @@ input[type="checkbox"].checkbox-no-label {
 }
 
 .disabled {
-  color: @grey;
+  color: @at-gray-848992;
 }
 
 a.disabled:hover {
-  color: @grey;
+  color: @at-gray-848992;
   cursor: not-allowed;
 }
 a.btn-disabled:hover {
@@ -1227,7 +1227,7 @@ a.btn-disabled:hover {
 
 .list-header .icon-sort-down,
 .list-header .icon-sort-up {
-  color: @black;
+  color: @at-black;
 }
 
 /* job_events syles */
@@ -1264,7 +1264,7 @@ tr td button i {
 }
 
 .modal {
-  border: 1px solid @black;
+  border: 1px solid @at-black;
 }
 
 .modal .SmartSearch-bar {
@@ -1276,7 +1276,7 @@ tr td button i {
 }
 
 .close {
-  color: @grey;
+  color: @at-gray-848992;
   opacity: .7;
   filter: alpha(opacity=70);
 }
@@ -1360,8 +1360,8 @@ tr td button i {
   img {
       margin-top: 15px;
       margin-bottom: 15px;
-      border: 1px solid @grey;
-      box-shadow: 3px 3px 5px 0 @grey;
+      border: 1px solid @at-gray-848992;
+      box-shadow: 3px 3px 5px 0 @at-gray-848992;
   }
 
   .img-container,
@@ -1379,7 +1379,7 @@ tr td button i {
       width: 100%;
       margin-top: 15px;
       border-radius: 6px;
-      color: @grey-txt;
+      color: @at-gray-70;
       font-size: 14px;
   }
 
@@ -1409,7 +1409,7 @@ tr td button i {
 #sockets {
     .section-title {
         font-weight: bold;
-        color: @blue-link;
+        color: @at-blue;
         margin-top: 30px;
     }
     #test-container .section-title {
@@ -1598,7 +1598,7 @@ tr td button i {
 }
 
 .red-text {
-    color: @red;
+    color: @at-red;
 }
 
 .factDetailsNote {
