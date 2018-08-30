@@ -26,8 +26,8 @@ table, tbody {
     font-size: 14px;
     font-weight: normal;
     text-transform: uppercase;
-    color: @list-header-txt;
-    background-color: @list-header-bg;
+    color: @at-gray-70;
+    background-color: @at-gray-eb;
     padding-left: 15px;
     padding-right: 15px;
     border-bottom-width:0px!important;
@@ -50,13 +50,13 @@ table, tbody {
 }
 
 .List-tableHeaderSort {
-    color: @list-header-icon;
+    color: @at-gray-848992;
 }
 
 .List-tableRow {
     height: 40px;
     font-size: 14px;
-    color: @list-item;
+    color: @at-gray-161b1f;
     border-bottom: 1px solid @at-gray-d7;
 }
 
@@ -69,7 +69,7 @@ table, tbody {
 }
 
 .List-tableRow--selected {
-    border-left: 5px solid @list-row-select-bord;
+    border-left: 5px solid @at-blue;
 }
 
 .List-tableRow--disabled {
@@ -81,8 +81,8 @@ table, tbody {
 
 .List-tableRow--disabled {
     .List-actionButton:hover {
-        color: @list-action-icon;
-        background-color: @list-actn-bg !important;
+        color: @at-gray-848992;
+        background-color: inherit !important;
     }
 }
 
@@ -135,28 +135,28 @@ table, tbody {
     font-size: 16px;
     height: 30px;
     min-width: 30px;
-    color: @list-action-icon;
-    background-color: @list-actn-bg;
+    color: @at-gray-848992;
+    background-color: inherit;
     border: none;
     border-radius: 4px;
     margin-left: 15px;
 }
 
 .List-actionButton:hover {
-    background-color: @list-actn-bg-hov !important;
-    color: @list-actn-icn-hov;
+    background-color: @at-blue !important;
+    color: @at-white;
 }
 
 .List-actionButton + .btn-disabled {
     &:hover {
         color: @at-gray-d7;
-        background-color: @list-actn-bg !important;
+        background-color: inherit !important;
     }
     color: @at-gray-d7;
 }
 
 .List-actionButton--delete:hover {
-    background-color: @list-actn-del-bg-hov !important;
+    background-color: @at-red !important;
 }
 
 .List-header {
@@ -176,7 +176,7 @@ table, tbody {
     height: 14px;
     line-height: 10px;
     margin: 0;
-    background-color: @list-title-badge;
+    background-color: @at-gray-848992;
     border-radius: 5px;
 }
 
@@ -185,7 +185,7 @@ table, tbody {
 }
 
 .List-titleText {
-    color: @list-title-txt;
+    color: @at-gray-70;
     font-size: 14px;
     font-weight: bold;
     margin-right: 10px;
@@ -247,14 +247,14 @@ table, tbody {
 }
 
 .List-buttonSubmit {
-    background-color: @submit-button-bg;
-    color: @submit-button-text;
+    background-color: @at-green;
+    color: @at-white;
 }
 
 .List-buttonSubmit:hover,
 .List-buttonSubmit:focus {
-    color: @submit-button-text;
-    background-color: @submit-button-bg-hov;
+    color: @at-white;
+    background-color: @at-green-hover;
 }
 
 .List-buttonDefault {
@@ -303,10 +303,10 @@ table, tbody {
 }
 
 .List-searchInput {
-    background-color: @list-srch-inpt-bg!important;
+    background-color: @at-gray-fc!important;
     font-size: 14px!important;
-    color: @list-srch-inpt-txt!important;
-    border-color: @list-srch-inpt-bord!important;
+    color: @at-gray-161b1f!important;
+    border-color: @at-gray-d7!important;
     border-radius: 0px 5px 5px 0px!important;
     padding-left: 15px!important;
     height: 34px!important;
@@ -315,26 +315,26 @@ table, tbody {
 }
 
 .List-searchInput:placeholder-shown {
-    color: @list-srch-inpt-ph-txt!important;
+    color: @at-gray-848992!important;
     text-transform: uppercase;
 }
 
 .List-searchInput:focus {
-    border-color: @list-srch-inpt-focus!important;
+    border-color: @at-blue!important;
 }
 
 .List-searchInputIcon {
     height: 32px;
     width: 32px;
-    border-left: 1px solid @list-srch-inpt-bord;
-    color: @list-srch-btn-icon!important;
+    border-left: 1px solid @at-gray-d7;
+    color: @at-gray-848992!important;
     float: right;
     position: relative;
     top: -33px;
     left: -2px;
     z-index: 10;
     font-size: 16px;
-    background-color: @list-srch-btn-bg;
+    background-color: @at-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,8 +344,8 @@ table, tbody {
 
 .List-searchInputIcon:hover {
     cursor: pointer;
-    background-color: @list-srch-btn-hov-bg;
-    color: @list-srch-btn-icon;
+    background-color: @at-gray-fa;
+    color: @at-gray-848992;
 }
 
 .List-searchNoResults {
@@ -363,7 +363,7 @@ table, tbody {
     border-radius: 5px;
     border: 1px solid @at-gray-d7;
     background-color: @at-gray-f6;
-    color: @list-no-items-txt;
+    color: @at-gray-848992;
     text-transform: uppercase;
     text-align: center;
     padding: 10px;
@@ -375,8 +375,8 @@ table, tbody {
 
 .List-actionButton--selected,
 .List-editButton--selected {
-    background-color: @list-actn-bg-hov !important;
-    color: @list-actn-icn-hov;
+    background-color: @at-blue !important;
+    color: @at-white;
 }
 
 .List-searchWidget {
@@ -463,15 +463,15 @@ table, tbody {
 }
 
 .List-dropdownSuccess {
-    background-color: @submit-button-bg;
-    color: @submit-button-text;
-    border-color: @submit-button-bg-hov;
+    background-color: @at-green;
+    color: @at-white;
+    border-color: @at-green-hover;
 }
 
 .List-dropdownSuccess:hover,
 .List-dropdownSuccess:focus {
-    color: @submit-button-text;
-    background-color: @submit-button-bg-hov;
+    color: @at-white;
+    background-color: @at-green-hover;
 }
 
 .List-infoCell {
