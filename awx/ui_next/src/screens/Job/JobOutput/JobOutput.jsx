@@ -50,6 +50,9 @@ function range(low, high) {
   return numbers;
 }
 
+const OUTPUT_PAGE_SIZE= 100;
+const OUTPUT_ORDER_BY = 'counter';
+
 class JobOutput extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +65,7 @@ class JobOutput extends Component {
       remoteRowCount: 0,
       isHostModalOpen: false,
       hostEvent: {},
+      isFinished: false,
     };
 
     this.cache = new CellMeasurerCache({
@@ -82,11 +86,20 @@ class JobOutput extends Component {
     this.isRowLoaded = this.isRowLoaded.bind(this);
     this.loadMoreRows = this.loadMoreRows.bind(this);
     this.scrollToRow = this.scrollToRow.bind(this);
+    this.clearPoll = this.clearPoll.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { job: { finished } } = this.props;
     this._isMounted = true;
-    this.loadJobEvents();
+    await this.loadJobEvents();
+
+    if (Boolean(finished)) {
+      this.scrollToRow(-1);
+      this.setState({ isFinished: true });
+    } else {
+      this.timer = setTimeout(() => this.pollEvents(), 2000);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -109,12 +122,35 @@ class JobOutput extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+    this.clearPoll();
+  }
+
+  clearPoll() {
+    clearTimeout(this.timer);
+    this.timer = null;
+  }
+
+  async pollEvents() {
+    const {
+      results,
+      isFinished,
+    } = this.state;
+
+    console.log({isFinished});
+    if (isFinished){
+      this.clearPoll();
+    } else {
+        const startIndex = Object.keys(results).length;
+        const stopIndex = startIndex + OUTPUT_PAGE_SIZE;
+        await this.loadMoreRows({startIndex, stopIndex});
+        this.timer = setTimeout(() => this.pollEvents(), 2000);
+      }
+    this.scrollToRow(-1);
   }
 
   async loadJobEvents() {
     const { job } = this.props;
-
-    const loadRange = range(1, 50);
+    const loadRange = range(1, OUTPUT_PAGE_SIZE);
     this._isMounted &&
       this.setState(({ currentlyLoading }) => ({
         hasContentLoading: true,
@@ -124,8 +160,8 @@ class JobOutput extends Component {
       const {
         data: { results: newResults = [], count },
       } = await JobsAPI.readEvents(job.id, job.type, {
-        page_size: 50,
-        order_by: 'start_line',
+        page_size: OUTPUT_PAGE_SIZE,
+        order_by: `-${OUTPUT_ORDER_BY}`
       });
       this._isMounted &&
         this.setState(({ results }) => {
@@ -221,7 +257,7 @@ class JobOutput extends Component {
       return Promise.resolve(null);
     }
     const { job } = this.props;
-
+    const { remoteRowCount } = this.state;
     const loadRange = range(startIndex, stopIndex);
     this._isMounted &&
       this.setState(({ currentlyLoading }) => ({
@@ -230,39 +266,48 @@ class JobOutput extends Component {
     const params = {
       counter__gte: startIndex,
       counter__lte: stopIndex,
-      order_by: 'start_line',
+      order_by: OUTPUT_ORDER_BY,
+      page_size: OUTPUT_PAGE_SIZE,
     };
 
-    return JobsAPI.readEvents(job.id, job.type, params).then(response => {
+    return JobsAPI.readEvents(job.id, job.type, params).then(({data: { results: events }}) => {
+      const isFinished = events.some(({event}) => event === 'playbook_on_stats');
+      const maxEventCounter = Math.max(...events.map(({ counter }) => counter));
+
       this._isMounted &&
-        this.setState(({ results, currentlyLoading }) => {
-          response.data.results.forEach(jobEvent => {
+      this.setState(({ results, currentlyLoading }) => {
+        events.forEach(jobEvent => {
             results[jobEvent.counter] = jobEvent;
           });
           return {
             results,
             currentlyLoading: currentlyLoading.filter(
               n => !loadRange.includes(n)
-            ),
-          };
-        });
+              ),
+              isFinished,
+              remoteRowCount: Math.max(maxEventCounter + 1, remoteRowCount)
+            };
+          });
     });
   }
 
   scrollToRow(rowIndex) {
+    console.log({rowIndex});
     this.listRef.scrollToRow(rowIndex);
   }
 
   handleScrollPrevious() {
     const startIndex = this.listRef.Grid._renderedRowStartIndex;
     const stopIndex = this.listRef.Grid._renderedRowStopIndex;
-    const scrollRange = stopIndex - startIndex + 1;
-    this.scrollToRow(Math.max(0, startIndex - scrollRange));
+    const scrollRange = stopIndex - startIndex;
+    this.scrollToRow(Math.max(0, stopIndex - scrollRange));
   }
 
   handleScrollNext() {
+    const startIndex = this.listRef.Grid._renderedRowStartIndex;
     const stopIndex = this.listRef.Grid._renderedRowStopIndex;
-    this.scrollToRow(stopIndex - 1);
+    const scrollRange = stopIndex - startIndex;
+    this.scrollToRow(stopIndex + scrollRange);
   }
 
   handleScrollFirst() {
@@ -270,8 +315,7 @@ class JobOutput extends Component {
   }
 
   handleScrollLast() {
-    const { remoteRowCount } = this.state;
-    this.scrollToRow(remoteRowCount - 1);
+    this.scrollToRow(-1);
   }
 
   handleResize({ width }) {
@@ -339,7 +383,8 @@ class JobOutput extends Component {
                       rowCount={remoteRowCount}
                       rowHeight={this.cache.rowHeight}
                       rowRenderer={this.rowRenderer}
-                      scrollToAlignment="start"
+                      scrollToAlignment="end"
+                      scrollToIndex={remoteRowCount}
                       width={width || 1}
                       overscanRowCount={20}
                     />
