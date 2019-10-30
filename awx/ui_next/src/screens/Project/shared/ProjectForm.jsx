@@ -15,23 +15,10 @@ import OrganizationLookup from '@components/Lookup/OrganizationLookup';
 import { CredentialTypesAPI, ProjectsAPI } from '@api';
 import { required } from '@util/validators';
 import styled from 'styled-components';
-import {
-  GitSubForm,
-  HgSubForm,
-  SvnSubForm,
-  InsightsSubForm,
-  SubFormTitle,
-} from './ProjectSubForms';
+import { SubForm } from './ProjectSubForms';
 
 const Form = styled(_Form)`
   padding: 0 24px;
-`;
-
-const ScmTypeFormRow = styled(FormRow)`
-  background-color: #f5f5f5;
-  grid-column: 1 / -1;
-  margin: 0 -24px;
-  padding: 24px;
 `;
 
 function ProjectForm(props) {
@@ -220,41 +207,14 @@ function ProjectForm(props) {
               )}
             />
             {formik.values.scm_type !== '' && (
-              <ScmTypeFormRow>
-                <SubFormTitle size="md">{i18n._(t`Type Details`)}</SubFormTitle>
-                {
-                  {
-                    git: (
-                      <GitSubForm
-                        setScmCredential={setScmCredential}
-                        scmCredential={scmCredential}
-                        scmUpdateOnLaunch={formik.values.scm_update_on_launch}
-                      />
-                    ),
-                    hg: (
-                      <HgSubForm
-                        setScmCredential={setScmCredential}
-                        scmCredential={scmCredential}
-                        scmUpdateOnLaunch={formik.values.scm_update_on_launch}
-                      />
-                    ),
-                    svn: (
-                      <SvnSubForm
-                        setScmCredential={setScmCredential}
-                        scmCredential={scmCredential}
-                        scmUpdateOnLaunch={formik.values.scm_update_on_launch}
-                      />
-                    ),
-                    insights: (
-                      <InsightsSubForm
-                        setInsightsCredential={setInsightsCredential}
-                        insightsCredential={insightsCredential}
-                        scmUpdateOnLaunch={formik.values.scm_update_on_launch}
-                      />
-                    ),
-                  }[formik.values.scm_type]
-                }
-              </ScmTypeFormRow>
+              <SubForm
+                type={formik.values.scm_type}
+                setScmCredential={setScmCredential}
+                scmCredential={scmCredential}
+                setInsightsCredential={setInsightsCredential}
+                insightsCredential={insightsCredential}
+                scmUpdateOnLaunch={formik.values.scm_update_on_launch}
+              />
             )}
             <Config>
               {({ custom_virtualenvs }) =>
