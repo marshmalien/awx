@@ -210,6 +210,7 @@ describe('<ProjectAdd />', () => {
   });
 
   test('should reset scm subform values when scm type changes', async () => {
+    // remove test
     await act(async () => {
       wrapper = mountWithContexts(
         <ProjectForm
