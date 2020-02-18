@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { PageSection, Card } from '@patternfly/react-core';
+import { PageSection, Card, CardBody } from '@patternfly/react-core';
 
 import { OrganizationsAPI } from '@api';
 import { Config } from '@contexts/Config';
-import { CardBody } from '@components/Card';
 import OrganizationForm from '../shared/OrganizationForm';
 
 function OrganizationAdd() {

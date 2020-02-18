@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Button, Chip, ChipGroup } from '@patternfly/react-core';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+  Chip,
+  ChipGroup,
+} from '@patternfly/react-core';
 import styled from 'styled-components';
 
 import AlertModal from '@components/AlertModal';
 import { DetailList, Detail } from '@components/DetailList';
-import { CardBody, CardActionsRow } from '@components/Card';
 import CredentialChip from '@components/CredentialChip';
 import { VariablesInput as _VariablesInput } from '@components/CodeMirrorInput';
 import DeleteButton from '@components/DeleteButton';
@@ -119,159 +125,175 @@ function JobDetail({ job, i18n }) {
   };
 
   return (
-    <CardBody>
-      <DetailList>
-        {/* TODO: hookup status to websockets */}
-        <Detail
-          label={i18n._(t`Status`)}
-          value={
-            <StatusDetailValue>
-              {job.status && <StatusIcon status={job.status} />}
-              {toTitleCase(job.status)}
-            </StatusDetailValue>
-          }
-        />
-        <Detail
-          label={i18n._(t`Started`)}
-          value={formatDateString(job.started)}
-        />
-        <Detail
-          label={i18n._(t`Finished`)}
-          value={formatDateString(job.finished)}
-        />
-        {jobTemplate && (
+    <>
+      <CardBody>
+        <DetailList>
+          {/* TODO: hookup status to websockets */}
           <Detail
-            label={i18n._(t`Template`)}
-            value={
-              <Link to={`/templates/job_template/${jobTemplate.id}`}>
-                {jobTemplate.name}
-              </Link>
-            }
-          />
-        )}
-        <Detail label={i18n._(t`Job Type`)} value={toTitleCase(job.job_type)} />
-        <Detail
-          label={i18n._(t`Launched By`)}
-          value={
-            launchedByLink ? (
-              <Link to={`${launchedByLink}`}>{launchedByValue}</Link>
-            ) : (
-              launchedByValue
-            )
-          }
-        />
-        {inventory && (
-          <Detail
-            label={i18n._(t`Inventory`)}
-            value={
-              <Link to={`/inventory/${inventory.id}`}>{inventory.name}</Link>
-            }
-          />
-        )}
-        {project && (
-          <Detail
-            label={i18n._(t`Project`)}
+            label={i18n._(t`Status`)}
             value={
               <StatusDetailValue>
-                {project.status && <StatusIcon status={project.status} />}
-                <Link to={`/projects/${project.id}`}>{project.name}</Link>
+                {job.status && <StatusIcon status={job.status} />}
+                {toTitleCase(job.status)}
               </StatusDetailValue>
             }
           />
-        )}
-        <Detail label={i18n._(t`Revision`)} value={job.scm_revision} />
-        <Detail label={i18n._(t`Playbook`)} value={job.playbook} />
-        <Detail label={i18n._(t`Limit`)} value={job.limit} />
-        <Detail label={i18n._(t`Verbosity`)} value={VERBOSITY[job.verbosity]} />
-        <Detail label={i18n._(t`Environment`)} value={job.custom_virtualenv} />
-        <Detail label={i18n._(t`Execution Node`)} value={job.execution_node} />
-        {instanceGroup && (
           <Detail
-            label={i18n._(t`Instance Group`)}
-            value={
-              <Link to={`/instance_groups/${instanceGroup.id}`}>
-                {instanceGroup.name}
-              </Link>
-            }
+            label={i18n._(t`Started`)}
+            value={formatDateString(job.started)}
           />
-        )}
-        {typeof job.job_slice_number === 'number' &&
-          typeof job.job_slice_count === 'number' && (
+          <Detail
+            label={i18n._(t`Finished`)}
+            value={formatDateString(job.finished)}
+          />
+          {jobTemplate && (
             <Detail
-              label={i18n._(t`Job Slice`)}
-              value={`${job.job_slice_number}/${job.job_slice_count}`}
+              label={i18n._(t`Template`)}
+              value={
+                <Link to={`/templates/job_template/${jobTemplate.id}`}>
+                  {jobTemplate.name}
+                </Link>
+              }
             />
           )}
-        {credentials && credentials.length > 0 && (
           <Detail
-            fullWidth
-            label={i18n._(t`Credentials`)}
+            label={i18n._(t`Job Type`)}
+            value={toTitleCase(job.job_type)}
+          />
+          <Detail
+            label={i18n._(t`Launched By`)}
             value={
-              <ChipGroup numChips={5}>
-                {credentials.map(c => (
-                  <CredentialChip key={c.id} credential={c} isReadOnly />
-                ))}
-              </ChipGroup>
+              launchedByLink ? (
+                <Link to={`${launchedByLink}`}>{launchedByValue}</Link>
+              ) : (
+                launchedByValue
+              )
             }
           />
-        )}
-        {labels && labels.count > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Labels`)}
-            value={
-              <ChipGroup numChips={5}>
-                {labels.results.map(l => (
-                  <Chip key={l.id} isReadOnly>
-                    {l.name}
-                  </Chip>
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-      </DetailList>
-      {job.extra_vars && (
-        <VariablesInput
-          css="margin: 20px 0"
-          id="job-variables"
-          readOnly
-          value={job.extra_vars}
-          rows={4}
-          label={i18n._(t`Variables`)}
-        />
-      )}
-      {job.artifacts && (
-        <VariablesInput
-          css="margin: 20px 0"
-          id="job-artifacts"
-          readOnly
-          value={JSON.stringify(job.artifacts)}
-          rows={4}
-          label={i18n._(t`Artifacts`)}
-        />
-      )}
-      <CardActionsRow>
-        {job.type !== 'system_job' &&
-          job.summary_fields.user_capabilities.start && (
-            <LaunchButton resource={job} aria-label={i18n._(t`Relaunch`)}>
-              {({ handleRelaunch }) => (
-                <Button type="submit" onClick={handleRelaunch}>
-                  {i18n._(t`Relaunch`)}
-                </Button>
-              )}
-            </LaunchButton>
+          {inventory && (
+            <Detail
+              label={i18n._(t`Inventory`)}
+              value={
+                <Link to={`/inventory/${inventory.id}`}>{inventory.name}</Link>
+              }
+            />
           )}
-        {job.summary_fields.user_capabilities.delete && (
-          <DeleteButton
-            name={job.name}
-            modalTitle={i18n._(t`Delete Job`)}
-            onConfirm={deleteJob}
-          >
-            {i18n._(t`Delete`)}
-          </DeleteButton>
+          {project && (
+            <Detail
+              label={i18n._(t`Project`)}
+              value={
+                <StatusDetailValue>
+                  {project.status && <StatusIcon status={project.status} />}
+                  <Link to={`/projects/${project.id}`}>{project.name}</Link>
+                </StatusDetailValue>
+              }
+            />
+          )}
+          <Detail label={i18n._(t`Revision`)} value={job.scm_revision} />
+          <Detail label={i18n._(t`Playbook`)} value={job.playbook} />
+          <Detail label={i18n._(t`Limit`)} value={job.limit} />
+          <Detail
+            label={i18n._(t`Verbosity`)}
+            value={VERBOSITY[job.verbosity]}
+          />
+          <Detail
+            label={i18n._(t`Environment`)}
+            value={job.custom_virtualenv}
+          />
+          <Detail
+            label={i18n._(t`Execution Node`)}
+            value={job.execution_node}
+          />
+          {instanceGroup && (
+            <Detail
+              label={i18n._(t`Instance Group`)}
+              value={
+                <Link to={`/instance_groups/${instanceGroup.id}`}>
+                  {instanceGroup.name}
+                </Link>
+              }
+            />
+          )}
+          {typeof job.job_slice_number === 'number' &&
+            typeof job.job_slice_count === 'number' && (
+              <Detail
+                label={i18n._(t`Job Slice`)}
+                value={`${job.job_slice_number}/${job.job_slice_count}`}
+              />
+            )}
+          {credentials && credentials.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Credentials`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {credentials.map(c => (
+                    <CredentialChip key={c.id} credential={c} isReadOnly />
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+          {labels && labels.count > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Labels`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {labels.results.map(l => (
+                    <Chip key={l.id} isReadOnly>
+                      {l.name}
+                    </Chip>
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+        </DetailList>
+        {job.extra_vars && (
+          <VariablesInput
+            css="margin: 20px 0"
+            id="job-variables"
+            readOnly
+            value={job.extra_vars}
+            rows={4}
+            label={i18n._(t`Variables`)}
+          />
         )}
-      </CardActionsRow>
+        {job.artifacts && (
+          <VariablesInput
+            css="margin: 20px 0"
+            id="job-artifacts"
+            readOnly
+            value={JSON.stringify(job.artifacts)}
+            rows={4}
+            label={i18n._(t`Artifacts`)}
+          />
+        )}
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {job.type !== 'system_job' &&
+            job.summary_fields.user_capabilities.start && (
+              <LaunchButton resource={job} aria-label={i18n._(t`Relaunch`)}>
+                {({ handleRelaunch }) => (
+                  <Button type="submit" onClick={handleRelaunch}>
+                    {i18n._(t`Relaunch`)}
+                  </Button>
+                )}
+              </LaunchButton>
+            )}
+          {job.summary_fields.user_capabilities.delete && (
+            <DeleteButton
+              name={job.name}
+              modalTitle={i18n._(t`Delete Job`)}
+              onConfirm={deleteJob}
+            >
+              {i18n._(t`Delete`)}
+            </DeleteButton>
+          )}
+        </CardActions>
+      </CardFooter>
       {errorMsg && (
         <AlertModal
           isOpen={errorMsg}
@@ -282,7 +304,7 @@ function JobDetail({ job, i18n }) {
           <ErrorDetail error={errorMsg} />
         </AlertModal>
       )}
-    </CardBody>
+    </>
   );
 }
 JobDetail.propTypes = {

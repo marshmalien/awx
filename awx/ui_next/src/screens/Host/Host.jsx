@@ -12,7 +12,7 @@ import {
 import { Card } from '@patternfly/react-core';
 import { CaretLeftIcon } from '@patternfly/react-icons';
 
-import { TabbedCardHeader } from '@components/Card';
+import TabbedCardHeader from '@components/Card';
 import CardCloseButton from '@components/CardCloseButton';
 import RoutedTabs from '@components/RoutedTabs';
 import ContentError from '@components/ContentError';

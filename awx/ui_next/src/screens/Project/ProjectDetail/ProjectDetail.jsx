@@ -5,9 +5,15 @@ import { t } from '@lingui/macro';
 import { Project } from '@types';
 import { Config } from '@contexts/Config';
 
-import { Button, List, ListItem } from '@patternfly/react-core';
+import {
+  Button,
+  CardBody,
+  CardActions,
+  CardFooter,
+  List,
+  ListItem,
+} from '@patternfly/react-core';
 import AlertModal from '@components/AlertModal';
-import { CardBody, CardActionsRow } from '@components/Card';
 import ContentLoading from '@components/ContentLoading';
 import DeleteButton from '@components/DeleteButton';
 import { DetailList, Detail, UserDateDetail } from '@components/DetailList';
@@ -79,100 +85,106 @@ function ProjectDetail({ project, i18n }) {
   }
 
   return (
-    <CardBody>
-      <DetailList gutter="sm">
-        <Detail
-          label={i18n._(t`Name`)}
-          value={name}
-          dataCy="project-detail-name"
-        />
-        <Detail label={i18n._(t`Description`)} value={description} />
-        {summary_fields.organization && (
+    <>
+      <CardBody>
+        <DetailList gutter="sm">
           <Detail
-            label={i18n._(t`Organization`)}
-            value={
-              <Link
-                to={`/organizations/${summary_fields.organization.id}/details`}
-              >
-                {summary_fields.organization.name}
-              </Link>
-            }
+            label={i18n._(t`Name`)}
+            value={name}
+            dataCy="project-detail-name"
           />
-        )}
-        <Detail
-          label={i18n._(t`SCM Type`)}
-          value={
-            scm_type === '' ? i18n._(t`Manual`) : toTitleCase(project.scm_type)
-          }
-        />
-        <Detail label={i18n._(t`SCM URL`)} value={scm_url} />
-        <Detail label={i18n._(t`SCM Branch`)} value={scm_branch} />
-        <Detail label={i18n._(t`SCM Refspec`)} value={scm_refspec} />
-        {summary_fields.credential && (
-          <Detail
-            label={i18n._(t`SCM Credential`)}
-            value={
-              <CredentialChip
-                key={summary_fields.credential.id}
-                credential={summary_fields.credential}
-                isReadOnly
-              />
-            }
-          />
-        )}
-        {optionsList && (
-          <Detail label={i18n._(t`Options`)} value={optionsList} />
-        )}
-        <Detail
-          label={i18n._(t`Cache Timeout`)}
-          value={`${scm_update_cache_timeout} ${i18n._(t`Seconds`)}`}
-        />
-        <Detail
-          label={i18n._(t`Ansible Environment`)}
-          value={custom_virtualenv}
-        />
-        <Config>
-          {({ project_base_dir }) => (
+          <Detail label={i18n._(t`Description`)} value={description} />
+          {summary_fields.organization && (
             <Detail
-              label={i18n._(t`Project Base Path`)}
-              value={project_base_dir}
+              label={i18n._(t`Organization`)}
+              value={
+                <Link
+                  to={`/organizations/${summary_fields.organization.id}/details`}
+                >
+                  {summary_fields.organization.name}
+                </Link>
+              }
             />
           )}
-        </Config>
-        <Detail label={i18n._(t`Playbook Directory`)} value={local_path} />
-        <UserDateDetail
-          label={i18n._(t`Created`)}
-          date={created}
-          user={summary_fields.created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          date={modified}
-          user={summary_fields.modified_by}
-        />
-      </DetailList>
-      <CardActionsRow>
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.edit && (
-            <Button
-              aria-label={i18n._(t`edit`)}
-              component={Link}
-              to={`/projects/${id}/edit`}
-            >
-              {i18n._(t`Edit`)}
-            </Button>
+          <Detail
+            label={i18n._(t`SCM Type`)}
+            value={
+              scm_type === ''
+                ? i18n._(t`Manual`)
+                : toTitleCase(project.scm_type)
+            }
+          />
+          <Detail label={i18n._(t`SCM URL`)} value={scm_url} />
+          <Detail label={i18n._(t`SCM Branch`)} value={scm_branch} />
+          <Detail label={i18n._(t`SCM Refspec`)} value={scm_refspec} />
+          {summary_fields.credential && (
+            <Detail
+              label={i18n._(t`SCM Credential`)}
+              value={
+                <CredentialChip
+                  key={summary_fields.credential.id}
+                  credential={summary_fields.credential}
+                  isReadOnly
+                />
+              }
+            />
           )}
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.delete && (
-            <DeleteButton
-              name={name}
-              modalTitle={i18n._(t`Delete Project`)}
-              onConfirm={handleDelete}
-            >
-              {i18n._(t`Delete`)}
-            </DeleteButton>
+          {optionsList && (
+            <Detail label={i18n._(t`Options`)} value={optionsList} />
           )}
-      </CardActionsRow>
+          <Detail
+            label={i18n._(t`Cache Timeout`)}
+            value={`${scm_update_cache_timeout} ${i18n._(t`Seconds`)}`}
+          />
+          <Detail
+            label={i18n._(t`Ansible Environment`)}
+            value={custom_virtualenv}
+          />
+          <Config>
+            {({ project_base_dir }) => (
+              <Detail
+                label={i18n._(t`Project Base Path`)}
+                value={project_base_dir}
+              />
+            )}
+          </Config>
+          <Detail label={i18n._(t`Playbook Directory`)} value={local_path} />
+          <UserDateDetail
+            label={i18n._(t`Created`)}
+            date={created}
+            user={summary_fields.created_by}
+          />
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            date={modified}
+            user={summary_fields.modified_by}
+          />
+        </DetailList>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.edit && (
+              <Button
+                aria-label={i18n._(t`edit`)}
+                component={Link}
+                to={`/projects/${id}/edit`}
+              >
+                {i18n._(t`Edit`)}
+              </Button>
+            )}
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.delete && (
+              <DeleteButton
+                name={name}
+                modalTitle={i18n._(t`Delete Project`)}
+                onConfirm={handleDelete}
+              >
+                {i18n._(t`Delete`)}
+              </DeleteButton>
+            )}
+        </CardActions>
+      </CardFooter>
       {/* Update delete modal to show dependencies https://github.com/ansible/awx/issues/5546 */}
       {deletionError && (
         <AlertModal
@@ -185,7 +197,7 @@ function ProjectDetail({ project, i18n }) {
           <ErrorDetail error={deletionError} />
         </AlertModal>
       )}
-    </CardBody>
+    </>
   );
 }
 

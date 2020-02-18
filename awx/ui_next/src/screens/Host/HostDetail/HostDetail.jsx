@@ -3,8 +3,13 @@ import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
 import { Host } from '@types';
-import { Button, Switch } from '@patternfly/react-core';
-import { CardBody, CardActionsRow } from '@components/Card';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+  Switch,
+} from '@patternfly/react-core';
 import AlertModal from '@components/AlertModal';
 import ErrorDetail from '@components/ErrorDetail';
 import { DetailList, Detail, UserDateDetail } from '@components/DetailList';
@@ -93,78 +98,82 @@ function HostDetail({ host, i18n, onUpdateHost }) {
     );
   }
   return (
-    <CardBody>
-      <Switch
-        css="padding-bottom: 40px"
-        id={`host-${id}-toggle`}
-        label={i18n._(t`On`)}
-        labelOff={i18n._(t`Off`)}
-        isChecked={enabled}
-        isDisabled={!user_capabilities.edit}
-        onChange={() => handleHostToggle()}
-        aria-label={i18n._(t`Toggle Host`)}
-      />
-      <DetailList gutter="sm">
-        <Detail label={i18n._(t`Name`)} value={name} />
-        <Detail
-          css="display: flex; flex: 1;"
-          value={<Sparkline jobs={recentPlaybookJobs} />}
-          label={i18n._(t`Activity`)}
+    <>
+      <CardBody>
+        <Switch
+          css="padding-bottom: 40px"
+          id={`host-${id}-toggle`}
+          label={i18n._(t`On`)}
+          labelOff={i18n._(t`Off`)}
+          isChecked={enabled}
+          isDisabled={!user_capabilities.edit}
+          onChange={() => handleHostToggle()}
+          aria-label={i18n._(t`Toggle Host`)}
         />
-        <Detail label={i18n._(t`Description`)} value={description} />
-        {inventory && (
+        <DetailList gutter="sm">
+          <Detail label={i18n._(t`Name`)} value={name} />
           <Detail
-            label={i18n._(t`Inventory`)}
-            value={
-              <Link
-                to={`/inventories/${
-                  kind === 'smart' ? 'smart_inventory' : 'inventory'
-                }/${inventoryId}/details`}
-              >
-                {inventory.name}
-              </Link>
-            }
+            css="display: flex; flex: 1;"
+            value={<Sparkline jobs={recentPlaybookJobs} />}
+            label={i18n._(t`Activity`)}
           />
-        )}
-        <UserDateDetail
-          date={created}
-          label={i18n._(t`Created`)}
-          user={created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          user={modified_by}
-          date={modified}
-        />
-        <VariablesDetail
-          value={host.variables}
-          rows={4}
-          label={i18n._(t`Variables`)}
-        />
-      </DetailList>
-      <CardActionsRow>
-        {user_capabilities && user_capabilities.edit && (
-          <Button
-            aria-label={i18n._(t`edit`)}
-            component={Link}
-            to={
-              pathname.startsWith('/inventories')
-                ? `/inventories/inventory/${inventoryId}/hosts/${inventoryHostId}/edit`
-                : `/hosts/${id}/edit`
-            }
-          >
-            {i18n._(t`Edit`)}
-          </Button>
-        )}
-        {user_capabilities && user_capabilities.delete && (
-          <DeleteButton
-            onConfirm={() => handleHostDelete()}
-            modalTitle={i18n._(t`Delete Host`)}
-            name={host.name}
+          <Detail label={i18n._(t`Description`)} value={description} />
+          {inventory && (
+            <Detail
+              label={i18n._(t`Inventory`)}
+              value={
+                <Link
+                  to={`/inventories/${
+                    kind === 'smart' ? 'smart_inventory' : 'inventory'
+                  }/${inventoryId}/details`}
+                >
+                  {inventory.name}
+                </Link>
+              }
+            />
+          )}
+          <UserDateDetail
+            date={created}
+            label={i18n._(t`Created`)}
+            user={created_by}
           />
-        )}
-      </CardActionsRow>
-    </CardBody>
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            user={modified_by}
+            date={modified}
+          />
+          <VariablesDetail
+            value={host.variables}
+            rows={4}
+            label={i18n._(t`Variables`)}
+          />
+        </DetailList>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {user_capabilities && user_capabilities.edit && (
+            <Button
+              aria-label={i18n._(t`edit`)}
+              component={Link}
+              to={
+                pathname.startsWith('/inventories')
+                  ? `/inventories/inventory/${inventoryId}/hosts/${inventoryHostId}/edit`
+                  : `/hosts/${id}/edit`
+              }
+            >
+              {i18n._(t`Edit`)}
+            </Button>
+          )}
+          {user_capabilities && user_capabilities.delete && (
+            <DeleteButton
+              onConfirm={() => handleHostDelete()}
+              modalTitle={i18n._(t`Delete Host`)}
+              name={host.name}
+            />
+          )}
+        </CardActions>
+      </CardFooter>
+    </>
   );
 }
 

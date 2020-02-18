@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { t } from '@lingui/macro';
 
-import { Button } from '@patternfly/react-core';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+} from '@patternfly/react-core';
 import { withI18n } from '@lingui/react';
 import { useHistory, useParams } from 'react-router-dom';
 import { VariablesDetail } from '@components/CodeMirrorInput';
-import { CardBody, CardActionsRow } from '@components/Card';
 import ErrorDetail from '@components/ErrorDetail';
 import AlertModal from '@components/AlertModal';
 import { DetailList, Detail, UserDateDetail } from '@components/DetailList';
@@ -44,58 +48,62 @@ function InventoryGroupDetail({ i18n, inventoryGroup }) {
   };
 
   return (
-    <CardBody>
-      <DetailList gutter="sm">
-        <Detail
-          label={i18n._(t`Name`)}
-          value={name}
-          dataCy="inventory-group-detail-name"
-        />
-        <Detail label={i18n._(t`Description`)} value={description} />
-        <VariablesDetail
-          label={i18n._(t`Variables`)}
-          value={variables}
-          rows={4}
-        />
-        <UserDateDetail
-          label={i18n._(t`Created`)}
-          date={created}
-          user={created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          date={modified}
-          user={modified_by}
-        />
-      </DetailList>
-      <CardActionsRow>
-        <Button
-          variant="primary"
-          aria-label={i18n._(t`Edit`)}
-          onClick={() =>
-            history.push(
-              `/inventories/inventory/${params.id}/groups/${params.groupId}/edit`
-            )
-          }
-        >
-          {i18n._(t`Edit`)}
-        </Button>
-        <Button
-          variant="danger"
-          aria-label={i18n._(t`Delete`)}
-          onClick={() => setIsDeleteModalOpen(true)}
-        >
-          {i18n._(t`Delete`)}
-        </Button>
-      </CardActionsRow>
-      {isDeleteModalOpen && (
-        <InventoryGroupsDeleteModal
-          groups={[inventoryGroup]}
-          onClose={() => setIsDeleteModalOpen(false)}
-          isModalOpen={isDeleteModalOpen}
-          onDelete={handleDelete}
-        />
-      )}
+    <>
+      <CardBody>
+        <DetailList gutter="sm">
+          <Detail
+            label={i18n._(t`Name`)}
+            value={name}
+            dataCy="inventory-group-detail-name"
+          />
+          <Detail label={i18n._(t`Description`)} value={description} />
+          <VariablesDetail
+            label={i18n._(t`Variables`)}
+            value={variables}
+            rows={4}
+          />
+          <UserDateDetail
+            label={i18n._(t`Created`)}
+            date={created}
+            user={created_by}
+          />
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            date={modified}
+            user={modified_by}
+          />
+        </DetailList>
+        {isDeleteModalOpen && (
+          <InventoryGroupsDeleteModal
+            groups={[inventoryGroup]}
+            onClose={() => setIsDeleteModalOpen(false)}
+            isModalOpen={isDeleteModalOpen}
+            onDelete={handleDelete}
+          />
+        )}
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          <Button
+            variant="primary"
+            aria-label={i18n._(t`Edit`)}
+            onClick={() =>
+              history.push(
+                `/inventories/inventory/${params.id}/groups/${params.groupId}/edit`
+              )
+            }
+          >
+            {i18n._(t`Edit`)}
+          </Button>
+          <Button
+            variant="danger"
+            aria-label={i18n._(t`Delete`)}
+            onClick={() => setIsDeleteModalOpen(true)}
+          >
+            {i18n._(t`Delete`)}
+          </Button>
+        </CardActions>
+      </CardFooter>
       {error && (
         <AlertModal
           variant="error"
@@ -107,7 +115,7 @@ function InventoryGroupDetail({ i18n, inventoryGroup }) {
           <ErrorDetail error={error} />
         </AlertModal>
       )}
-    </CardBody>
+    </>
   );
 }
 export default withI18n()(InventoryGroupDetail);

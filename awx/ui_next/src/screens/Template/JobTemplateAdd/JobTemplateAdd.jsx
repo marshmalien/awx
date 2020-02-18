@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card } from '@patternfly/react-core';
-import { CardBody } from '@components/Card';
+import { Card, CardBody } from '@patternfly/react-core';
 import JobTemplateForm from '../shared/JobTemplateForm';
 import { JobTemplatesAPI } from '@api';
 

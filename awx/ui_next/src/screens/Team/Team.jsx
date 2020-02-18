@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import { Card, PageSection } from '@patternfly/react-core';
 import CardCloseButton from '@components/CardCloseButton';
-import { TabbedCardHeader } from '@components/Card';
+import TabbedCardHeader from '@components/Card';
 import RoutedTabs from '@components/RoutedTabs';
 import ContentError from '@components/ContentError';
 import TeamDetail from './TeamDetail';

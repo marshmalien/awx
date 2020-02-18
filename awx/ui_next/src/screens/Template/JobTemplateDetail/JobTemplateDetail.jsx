@@ -3,6 +3,9 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { withI18n } from '@lingui/react';
 import {
   Button,
+  CardActions,
+  CardBody,
+  CardFooter,
   Chip,
   ChipGroup,
   TextList,
@@ -14,7 +17,6 @@ import styled from 'styled-components';
 import { t } from '@lingui/macro';
 
 import AlertModal from '@components/AlertModal';
-import { CardBody, CardActionsRow } from '@components/Card';
 import ContentError from '@components/ContentError';
 import ContentLoading from '@components/ContentLoading';
 import CredentialChip from '@components/CredentialChip';
@@ -161,179 +163,191 @@ function JobTemplateDetail({ i18n, template }) {
   }
 
   return (
-    <CardBody>
-      <DetailList gutter="sm">
-        <Detail label={i18n._(t`Name`)} value={name} dataCy="jt-detail-name" />
-        <Detail label={i18n._(t`Description`)} value={description} />
-        <Detail label={i18n._(t`Job Type`)} value={job_type} />
-        {summary_fields.inventory ? (
+    <>
+      <CardBody>
+        <DetailList gutter="sm">
           <Detail
-            label={i18n._(t`Inventory`)}
-            value={inventoryValue(
-              summary_fields.inventory.kind,
-              summary_fields.inventory.id
-            )}
+            label={i18n._(t`Name`)}
+            value={name}
+            dataCy="jt-detail-name"
           />
-        ) : (
-          !ask_inventory_on_launch &&
-          renderMissingDataDetail(i18n._(t`Inventory`))
-        )}
-        {summary_fields.project ? (
-          <Detail
-            label={i18n._(t`Project`)}
-            value={
-              <Link to={`/projects/${summary_fields.project.id}/details`}>
-                {summary_fields.project.name}
-              </Link>
-            }
-          />
-        ) : (
-          renderMissingDataDetail(i18n._(t`Project`))
-        )}
-        <Detail label={i18n._(t`SCM Branch`)} value={template.scm_branch} />
-        <Detail label={i18n._(t`Playbook`)} value={playbook} />
-        <Detail label={i18n._(t`Forks`)} value={forks || '0'} />
-        <Detail label={i18n._(t`Limit`)} value={limit} />
-        <Detail
-          label={i18n._(t`Verbosity`)}
-          value={verbosityDetails[0].details}
-        />
-        <Detail label={i18n._(t`Timeout`)} value={timeout || '0'} />
-        <UserDateDetail
-          label={i18n._(t`Created`)}
-          date={created}
-          user={summary_fields.created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          date={modified}
-          user={summary_fields.modified_by}
-        />
-        <Detail
-          label={i18n._(t`Show Changes`)}
-          value={diff_mode ? 'On' : 'Off'}
-        />
-        <Detail label={i18n._(t` Job Slicing`)} value={job_slice_count} />
-        {host_config_key && (
-          <React.Fragment>
+          <Detail label={i18n._(t`Description`)} value={description} />
+          <Detail label={i18n._(t`Job Type`)} value={job_type} />
+          {summary_fields.inventory ? (
             <Detail
-              label={i18n._(t`Host Config Key`)}
-              value={host_config_key}
+              label={i18n._(t`Inventory`)}
+              value={inventoryValue(
+                summary_fields.inventory.kind,
+                summary_fields.inventory.id
+              )}
             />
-            <Detail
-              label={i18n._(t`Provisioning Callback URL`)}
-              value={generateCallBackUrl}
-            />
-          </React.Fragment>
-        )}
-        {renderOptionsField && (
-          <Detail label={i18n._(t`Options`)} value={renderOptions} />
-        )}
-        {summary_fields.credentials && summary_fields.credentials.length > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Credentials`)}
-            value={
-              <ChipGroup numChips={5}>
-                {summary_fields.credentials.map(c => (
-                  <CredentialChip key={c.id} credential={c} isReadOnly />
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-        {summary_fields.labels && summary_fields.labels.results.length > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Labels`)}
-            value={
-              <ChipGroup numChips={5}>
-                {summary_fields.labels.results.map(l => (
-                  <Chip key={l.id} isReadOnly>
-                    {l.name}
-                  </Chip>
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-        {instanceGroups.length > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Instance Groups`)}
-            value={
-              <ChipGroup numChips={5}>
-                {instanceGroups.map(ig => (
-                  <Chip key={ig.id} isReadOnly>
-                    {ig.name}
-                  </Chip>
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-        {job_tags && job_tags.length > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Job tags`)}
-            value={
-              <ChipGroup numChips={5}>
-                {job_tags.split(',').map(jobTag => (
-                  <Chip key={jobTag} isReadOnly>
-                    {jobTag}
-                  </Chip>
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-        {skip_tags && skip_tags.length > 0 && (
-          <Detail
-            fullWidth
-            label={i18n._(t`Skip tags`)}
-            value={
-              <ChipGroup numChips={5}>
-                {skip_tags.split(',').map(skipTag => (
-                  <Chip key={skipTag} isReadOnly>
-                    {skipTag}
-                  </Chip>
-                ))}
-              </ChipGroup>
-            }
-          />
-        )}
-      </DetailList>
-      <CardActionsRow>
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.edit && (
-            <Button
-              component={Link}
-              to={`/templates/job_template/${templateId}/edit`}
-              aria-label={i18n._(t`Edit`)}
-            >
-              {i18n._(t`Edit`)}
-            </Button>
+          ) : (
+            !ask_inventory_on_launch &&
+            renderMissingDataDetail(i18n._(t`Inventory`))
           )}
-        {canLaunch && (
-          <LaunchButton resource={template} aria-label={i18n._(t`Launch`)}>
-            {({ handleLaunch }) => (
-              <Button variant="secondary" type="submit" onClick={handleLaunch}>
-                {i18n._(t`Launch`)}
+          {summary_fields.project ? (
+            <Detail
+              label={i18n._(t`Project`)}
+              value={
+                <Link to={`/projects/${summary_fields.project.id}/details`}>
+                  {summary_fields.project.name}
+                </Link>
+              }
+            />
+          ) : (
+            renderMissingDataDetail(i18n._(t`Project`))
+          )}
+          <Detail label={i18n._(t`SCM Branch`)} value={template.scm_branch} />
+          <Detail label={i18n._(t`Playbook`)} value={playbook} />
+          <Detail label={i18n._(t`Forks`)} value={forks || '0'} />
+          <Detail label={i18n._(t`Limit`)} value={limit} />
+          <Detail
+            label={i18n._(t`Verbosity`)}
+            value={verbosityDetails[0].details}
+          />
+          <Detail label={i18n._(t`Timeout`)} value={timeout || '0'} />
+          <UserDateDetail
+            label={i18n._(t`Created`)}
+            date={created}
+            user={summary_fields.created_by}
+          />
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            date={modified}
+            user={summary_fields.modified_by}
+          />
+          <Detail
+            label={i18n._(t`Show Changes`)}
+            value={diff_mode ? 'On' : 'Off'}
+          />
+          <Detail label={i18n._(t` Job Slicing`)} value={job_slice_count} />
+          {host_config_key && (
+            <React.Fragment>
+              <Detail
+                label={i18n._(t`Host Config Key`)}
+                value={host_config_key}
+              />
+              <Detail
+                label={i18n._(t`Provisioning Callback URL`)}
+                value={generateCallBackUrl}
+              />
+            </React.Fragment>
+          )}
+          {renderOptionsField && (
+            <Detail label={i18n._(t`Options`)} value={renderOptions} />
+          )}
+          {summary_fields.credentials && summary_fields.credentials.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Credentials`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {summary_fields.credentials.map(c => (
+                    <CredentialChip key={c.id} credential={c} isReadOnly />
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+          {summary_fields.labels && summary_fields.labels.results.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Labels`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {summary_fields.labels.results.map(l => (
+                    <Chip key={l.id} isReadOnly>
+                      {l.name}
+                    </Chip>
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+          {instanceGroups.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Instance Groups`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {instanceGroups.map(ig => (
+                    <Chip key={ig.id} isReadOnly>
+                      {ig.name}
+                    </Chip>
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+          {job_tags && job_tags.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Job tags`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {job_tags.split(',').map(jobTag => (
+                    <Chip key={jobTag} isReadOnly>
+                      {jobTag}
+                    </Chip>
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+          {skip_tags && skip_tags.length > 0 && (
+            <Detail
+              fullWidth
+              label={i18n._(t`Skip tags`)}
+              value={
+                <ChipGroup numChips={5}>
+                  {skip_tags.split(',').map(skipTag => (
+                    <Chip key={skipTag} isReadOnly>
+                      {skipTag}
+                    </Chip>
+                  ))}
+                </ChipGroup>
+              }
+            />
+          )}
+        </DetailList>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.edit && (
+              <Button
+                component={Link}
+                to={`/templates/job_template/${templateId}/edit`}
+                aria-label={i18n._(t`Edit`)}
+              >
+                {i18n._(t`Edit`)}
               </Button>
             )}
-          </LaunchButton>
-        )}
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.delete && (
-            <DeleteButton
-              name={name}
-              modalTitle={i18n._(t`Delete Job Template`)}
-              onConfirm={handleDelete}
-            >
-              {i18n._(t`Delete`)}
-            </DeleteButton>
+          {canLaunch && (
+            <LaunchButton resource={template} aria-label={i18n._(t`Launch`)}>
+              {({ handleLaunch }) => (
+                <Button
+                  variant="secondary"
+                  type="submit"
+                  onClick={handleLaunch}
+                >
+                  {i18n._(t`Launch`)}
+                </Button>
+              )}
+            </LaunchButton>
           )}
-      </CardActionsRow>
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.delete && (
+              <DeleteButton
+                name={name}
+                modalTitle={i18n._(t`Delete Job Template`)}
+                onConfirm={handleDelete}
+              >
+                {i18n._(t`Delete`)}
+              </DeleteButton>
+            )}
+        </CardActions>
+      </CardFooter>
       {/* Update delete modal to show dependencies https://github.com/ansible/awx/issues/5546 */}
       {deletionError && (
         <AlertModal
@@ -346,7 +360,7 @@ function JobTemplateDetail({ i18n, template }) {
           <ErrorDetail error={deletionError} />
         </AlertModal>
       )}
-    </CardBody>
+    </>
   );
 }
 

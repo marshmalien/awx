@@ -3,7 +3,7 @@ import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
 import { Switch, Route, Redirect, withRouter, Link } from 'react-router-dom';
-import { TabbedCardHeader } from '@components/Card';
+import TabbedCardHeader from '@components/Card';
 import CardCloseButton from '@components/CardCloseButton';
 import ContentError from '@components/ContentError';
 import NotificationList from '@components/NotificationList';

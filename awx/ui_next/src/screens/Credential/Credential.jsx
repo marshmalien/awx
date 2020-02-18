@@ -10,7 +10,7 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom';
-import { TabbedCardHeader } from '@components/Card';
+import TabbedCardHeader from '@components/Card';
 import CardCloseButton from '@components/CardCloseButton';
 import ContentError from '@components/ContentError';
 import RoutedTabs from '@components/RoutedTabs';

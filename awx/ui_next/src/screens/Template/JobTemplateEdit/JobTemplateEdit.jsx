@@ -1,7 +1,7 @@
 /* eslint react/no-unused-state: 0 */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { CardBody } from '@components/Card';
+import { CardBody } from '@patternfly/react-core';
 import ContentError from '@components/ContentError';
 import ContentLoading from '@components/ContentLoading';
 import { JobTemplatesAPI, ProjectsAPI } from '@api';

@@ -11,8 +11,8 @@ import {
   List,
 } from 'react-virtualized';
 
+import { CardBody } from '@patternfly/react-core';
 import AlertModal from '@components/AlertModal';
-import { CardBody } from '@components/Card';
 import ContentError from '@components/ContentError';
 import ContentLoading from '@components/ContentLoading';
 import ErrorDetail from '@components/ErrorDetail';

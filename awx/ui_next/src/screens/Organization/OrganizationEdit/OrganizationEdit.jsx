@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { CardBody } from '@components/Card';
+import { CardBody } from '@patternfly/react-core';
 import { OrganizationsAPI } from '@api';
 import { Config } from '@contexts/Config';
 

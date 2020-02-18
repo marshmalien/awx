@@ -4,8 +4,12 @@ import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
 
 import AlertModal from '@components/AlertModal';
-import { Button } from '@patternfly/react-core';
-import { CardBody, CardActionsRow } from '@components/Card';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+} from '@patternfly/react-core';
 import ContentLoading from '@components/ContentLoading';
 import DeleteButton from '@components/DeleteButton';
 import { DetailList, Detail } from '@components/DetailList';
@@ -55,47 +59,54 @@ function UserDetail({ user, i18n }) {
   }
 
   return (
-    <CardBody>
-      <DetailList>
-        <Detail
-          label={i18n._(t`Username`)}
-          value={username}
-          dataCy="user-detail-username"
-        />
-        <Detail label={i18n._(t`Email`)} value={email} />
-        <Detail label={i18n._(t`First Name`)} value={`${first_name}`} />
-        <Detail label={i18n._(t`Last Name`)} value={`${last_name}`} />
-        <Detail label={i18n._(t`User Type`)} value={`${user_type}`} />
-        {last_login && (
+    <>
+      <CardBody>
+        <DetailList>
           <Detail
-            label={i18n._(t`Last Login`)}
-            value={formatDateString(last_login)}
+            label={i18n._(t`Username`)}
+            value={username}
+            dataCy="user-detail-username"
           />
-        )}
-        <Detail label={i18n._(t`Created`)} value={formatDateString(created)} />
-      </DetailList>
-      <CardActionsRow>
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.edit && (
-            <Button
-              aria-label={i18n._(t`edit`)}
-              component={Link}
-              to={`/users/${id}/edit`}
-            >
-              {i18n._(t`Edit`)}
-            </Button>
+          <Detail label={i18n._(t`Email`)} value={email} />
+          <Detail label={i18n._(t`First Name`)} value={`${first_name}`} />
+          <Detail label={i18n._(t`Last Name`)} value={`${last_name}`} />
+          <Detail label={i18n._(t`User Type`)} value={`${user_type}`} />
+          {last_login && (
+            <Detail
+              label={i18n._(t`Last Login`)}
+              value={formatDateString(last_login)}
+            />
           )}
-        {summary_fields.user_capabilities &&
-          summary_fields.user_capabilities.delete && (
-            <DeleteButton
-              name={username}
-              modalTitle={i18n._(t`Delete User`)}
-              onConfirm={handleDelete}
-            >
-              {i18n._(t`Delete`)}
-            </DeleteButton>
-          )}
-      </CardActionsRow>
+          <Detail
+            label={i18n._(t`Created`)}
+            value={formatDateString(created)}
+          />
+        </DetailList>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.edit && (
+              <Button
+                aria-label={i18n._(t`edit`)}
+                component={Link}
+                to={`/users/${id}/edit`}
+              >
+                {i18n._(t`Edit`)}
+              </Button>
+            )}
+          {summary_fields.user_capabilities &&
+            summary_fields.user_capabilities.delete && (
+              <DeleteButton
+                name={username}
+                modalTitle={i18n._(t`Delete User`)}
+                onConfirm={handleDelete}
+              >
+                {i18n._(t`Delete`)}
+              </DeleteButton>
+            )}
+        </CardActions>
+      </CardFooter>
       {deletionError && (
         <AlertModal
           isOpen={deletionError}
@@ -107,7 +118,7 @@ function UserDetail({ user, i18n }) {
           <ErrorDetail error={deletionError} />
         </AlertModal>
       )}
-    </CardBody>
+    </>
   );
 }
 

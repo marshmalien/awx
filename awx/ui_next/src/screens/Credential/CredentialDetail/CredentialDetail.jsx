@@ -4,9 +4,15 @@ import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
 import { shape } from 'prop-types';
 
-import { Button, List, ListItem } from '@patternfly/react-core';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+  List,
+  ListItem,
+} from '@patternfly/react-core';
 import AlertModal from '@components/AlertModal';
-import { CardBody, CardActionsRow } from '@components/Card';
 import ContentError from '@components/ContentError';
 import ContentLoading from '@components/ContentLoading';
 import DeleteButton from '@components/DeleteButton';
@@ -99,74 +105,79 @@ function CredentialDetail({ i18n, credential }) {
   }
 
   return (
-    <CardBody>
-      <DetailList>
-        <Detail label={i18n._(t`Name`)} value={name} />
-        <Detail label={i18n._(t`Description`)} value={description} />
-        {organization && (
+    <>
+      <CardBody>
+        <DetailList>
+          <Detail label={i18n._(t`Name`)} value={name} />
+          <Detail label={i18n._(t`Description`)} value={description} />
+          {organization && (
+            <Detail
+              label={i18n._(t`Organization`)}
+              value={
+                <Link to={`/organizations/${organization.id}/details`}>
+                  {organization.name}
+                </Link>
+              }
+            />
+          )}
           <Detail
-            label={i18n._(t`Organization`)}
+            label={i18n._(t`Credential Type`)}
             value={
-              <Link to={`/organizations/${organization.id}/details`}>
-                {organization.name}
-              </Link>
+              managedByTower ? (
+                credential_type.name
+              ) : (
+                <Link to={`/credential_types/${credential_type.id}/details`}>
+                  {credential_type.name}
+                </Link>
+              )
             }
           />
-        )}
-        <Detail
-          label={i18n._(t`Credential Type`)}
-          value={
-            managedByTower ? (
-              credential_type.name
-            ) : (
-              <Link to={`/credential_types/${credential_type.id}/details`}>
-                {credential_type.name}
-              </Link>
-            )
-          }
-        />
 
-        {fields.map(field => renderDetail(field))}
+          {fields.map(field => renderDetail(field))}
 
-        <UserDateDetail
-          label={i18n._(t`Created`)}
-          date={created}
-          user={created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          date={modified}
-          user={modified_by}
-        />
-      </DetailList>
-      <CardActionsRow>
-        {user_capabilities.edit && (
-          <Button component={Link} to={`/credentials/${credentialId}/edit`}>
-            {i18n._(t`Edit`)}
-          </Button>
-        )}
-        {user_capabilities.delete && (
-          <DeleteButton
-            name={name}
-            modalTitle={i18n._(t`Delete Credential`)}
-            onConfirm={handleDelete}
+          <UserDateDetail
+            label={i18n._(t`Created`)}
+            date={created}
+            user={created_by}
+          />
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            date={modified}
+            user={modified_by}
+          />
+        </DetailList>
+
+        {deletionError && (
+          <AlertModal
+            isOpen={deletionError}
+            variant="error"
+            title={i18n._(t`Error!`)}
+            onClose={() => setDeletionError(null)}
           >
-            {i18n._(t`Delete`)}
-          </DeleteButton>
+            {i18n._(t`Failed to delete credential.`)}
+            <ErrorDetail error={deletionError} />
+          </AlertModal>
         )}
-      </CardActionsRow>
-      {deletionError && (
-        <AlertModal
-          isOpen={deletionError}
-          variant="error"
-          title={i18n._(t`Error!`)}
-          onClose={() => setDeletionError(null)}
-        >
-          {i18n._(t`Failed to delete credential.`)}
-          <ErrorDetail error={deletionError} />
-        </AlertModal>
-      )}
-    </CardBody>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {user_capabilities.edit && (
+            <Button component={Link} to={`/credentials/${credentialId}/edit`}>
+              {i18n._(t`Edit`)}
+            </Button>
+          )}
+          {user_capabilities.delete && (
+            <DeleteButton
+              name={name}
+              modalTitle={i18n._(t`Delete Credential`)}
+              onConfirm={handleDelete}
+            >
+              {i18n._(t`Delete`)}
+            </DeleteButton>
+          )}
+        </CardActions>
+      </CardFooter>
+    </>
   );
 }
 

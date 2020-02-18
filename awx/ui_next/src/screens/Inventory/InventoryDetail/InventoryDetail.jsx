@@ -2,8 +2,14 @@ import React, { useCallback, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Button, Chip, ChipGroup } from '@patternfly/react-core';
-import { CardBody, CardActionsRow } from '@components/Card';
+import {
+  Button,
+  CardActions,
+  CardBody,
+  CardFooter,
+  Chip,
+  ChipGroup,
+} from '@patternfly/react-core';
 import { DetailList, Detail, UserDateDetail } from '@components/DetailList';
 import { VariablesDetail } from '@components/CodeMirrorInput';
 import DeleteButton from '@components/DeleteButton';
@@ -52,73 +58,80 @@ function InventoryDetail({ inventory, i18n }) {
   }
 
   return (
-    <CardBody>
-      <DetailList>
-        <Detail
-          label={i18n._(t`Name`)}
-          value={inventory.name}
-          dataCy="inventory-detail-name"
-        />
-        <Detail label={i18n._(t`Activity`)} value="Coming soon" />
-        <Detail label={i18n._(t`Description`)} value={inventory.description} />
-        <Detail label={i18n._(t`Type`)} value={i18n._(t`Inventory`)} />
-        <Detail
-          label={i18n._(t`Organization`)}
-          value={
-            <Link to={`/organizations/${organization.id}/details`}>
-              {organization.name}
-            </Link>
-          }
-        />
-        <Detail
-          fullWidth
-          label={i18n._(t`Instance Groups`)}
-          value={
-            <ChipGroup numChips={5}>
-              {instanceGroups.map(ig => (
-                <Chip key={ig.id} isReadOnly>
-                  {ig.name}
-                </Chip>
-              ))}
-            </ChipGroup>
-          }
-        />
-        <VariablesDetail
-          label={i18n._(t`Variables`)}
-          value={inventory.variables}
-          rows={4}
-        />
-        <UserDateDetail
-          label={i18n._(t`Created`)}
-          date={inventory.created}
-          user={inventory.summary_fields.created_by}
-        />
-        <UserDateDetail
-          label={i18n._(t`Last Modified`)}
-          date={inventory.modified}
-          user={inventory.summary_fields.modified_by}
-        />
-      </DetailList>
-      <CardActionsRow>
-        {userCapabilities.edit && (
-          <Button
-            component={Link}
-            to={`/inventories/inventory/${inventory.id}/edit`}
-          >
-            {i18n._(t`Edit`)}
-          </Button>
-        )}
-        {userCapabilities.delete && (
-          <DeleteButton
-            name={inventory.name}
-            modalTitle={i18n._(t`Delete Inventory`)}
-            onConfirm={deleteInventory}
-          >
-            {i18n._(t`Delete`)}
-          </DeleteButton>
-        )}
-      </CardActionsRow>
-    </CardBody>
+    <>
+      <CardBody>
+        <DetailList>
+          <Detail
+            label={i18n._(t`Name`)}
+            value={inventory.name}
+            dataCy="inventory-detail-name"
+          />
+          <Detail label={i18n._(t`Activity`)} value="Coming soon" />
+          <Detail
+            label={i18n._(t`Description`)}
+            value={inventory.description}
+          />
+          <Detail label={i18n._(t`Type`)} value={i18n._(t`Inventory`)} />
+          <Detail
+            label={i18n._(t`Organization`)}
+            value={
+              <Link to={`/organizations/${organization.id}/details`}>
+                {organization.name}
+              </Link>
+            }
+          />
+          <Detail
+            fullWidth
+            label={i18n._(t`Instance Groups`)}
+            value={
+              <ChipGroup numChips={5}>
+                {instanceGroups.map(ig => (
+                  <Chip key={ig.id} isReadOnly>
+                    {ig.name}
+                  </Chip>
+                ))}
+              </ChipGroup>
+            }
+          />
+          <VariablesDetail
+            label={i18n._(t`Variables`)}
+            value={inventory.variables}
+            rows={4}
+          />
+          <UserDateDetail
+            label={i18n._(t`Created`)}
+            date={inventory.created}
+            user={inventory.summary_fields.created_by}
+          />
+          <UserDateDetail
+            label={i18n._(t`Last Modified`)}
+            date={inventory.modified}
+            user={inventory.summary_fields.modified_by}
+          />
+        </DetailList>
+      </CardBody>
+      <CardFooter>
+        <CardActions>
+          {userCapabilities.edit && (
+            <Button
+              component={Link}
+              to={`/inventories/inventory/${inventory.id}/edit`}
+            >
+              {i18n._(t`Edit`)}
+            </Button>
+          )}
+          {userCapabilities.delete && (
+            <DeleteButton
+              name={inventory.name}
+              modalTitle={i18n._(t`Delete Inventory`)}
+              onConfirm={deleteInventory}
+            >
+              {i18n._(t`Delete`)}
+            </DeleteButton>
+          )}
+        </CardActions>
+      </CardFooter>
+    </>
   );
 }
 InventoryDetail.propTypes = {

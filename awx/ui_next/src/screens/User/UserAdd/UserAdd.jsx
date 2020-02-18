@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Card as _Card, PageSection } from '@patternfly/react-core';
-import { CardBody } from '@components/Card';
+import { Card as _Card, CardBody, PageSection } from '@patternfly/react-core';
 import UserForm from '../shared/UserForm';
 import { UsersAPI } from '@api';
 
