@@ -23,6 +23,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        start: true,
       },
     },
   },
@@ -34,6 +35,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        start: true,
       },
     },
   },
@@ -45,6 +47,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        start: true,
       },
     },
   },
@@ -56,6 +59,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        start: true,
       },
     },
   },
@@ -67,6 +71,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        edit: true,
       },
     },
   },
@@ -78,6 +83,7 @@ const mockResults = [
     summary_fields: {
       user_capabilities: {
         delete: true,
+        edit: true,
       },
     },
   },
@@ -88,18 +94,16 @@ UnifiedJobsAPI.read.mockResolvedValue({
 });
 
 describe('<JobList />', () => {
-  test('initially renders succesfully', async done => {
+  test('initially renders succesfully', async () => {
     const wrapper = mountWithContexts(<JobList />);
     await waitForElement(
       wrapper,
       'JobList',
       el => el.state('jobs').length === 6
     );
-
-    done();
   });
 
-  test('select makes expected state updates', async done => {
+  test('select makes expected state updates', async () => {
     const [mockItem] = mockResults;
     const wrapper = mountWithContexts(<JobList />);
     await waitForElement(wrapper, 'JobListItem', el => el.length === 6);
@@ -115,11 +119,9 @@ describe('<JobList />', () => {
       .first()
       .prop('onSelect')(mockItem);
     expect(wrapper.find('JobList').state('selected').length).toEqual(0);
-
-    done();
   });
 
-  test('select-all-delete makes expected state updates and api calls', async done => {
+  test('select-all-delete makes expected state updates and api calls', async () => {
     AdHocCommandsAPI.destroy = jest.fn();
     InventoryUpdatesAPI.destroy = jest.fn();
     JobsAPI.destroy = jest.fn();
@@ -145,11 +147,9 @@ describe('<JobList />', () => {
     expect(ProjectUpdatesAPI.destroy).toHaveBeenCalledTimes(1);
     expect(SystemJobsAPI.destroy).toHaveBeenCalledTimes(1);
     expect(WorkflowJobsAPI.destroy).toHaveBeenCalledTimes(1);
-
-    done();
   });
 
-  test('error is shown when job not successfully deleted from api', async done => {
+  test('error is shown when job not successfully deleted from api', async () => {
     JobsAPI.destroy.mockRejectedValue(
       new Error({
         response: {
@@ -173,7 +173,5 @@ describe('<JobList />', () => {
       'Modal',
       el => el.props().isOpen === true && el.props().title === 'Error!'
     );
-
-    done();
   });
 });
