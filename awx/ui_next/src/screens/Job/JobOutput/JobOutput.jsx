@@ -122,6 +122,7 @@ class JobOutput extends Component {
       remoteRowCount: 0,
       isHostModalOpen: false,
       hostEvent: {},
+      parents: [],
     };
 
     this.cache = new CellMeasurerCache({
@@ -144,6 +145,8 @@ class JobOutput extends Component {
     this.loadMoreRows = this.loadMoreRows.bind(this);
     this.scrollToRow = this.scrollToRow.bind(this);
     this.monitorJobSocketCounter = this.monitorJobSocketCounter.bind(this);
+    this.toggleEvent = this.toggleEvent.bind(this);
+    this.togglePage = this.togglePage.bind(this);
   }
 
   componentDidMount() {
@@ -280,8 +283,41 @@ class JobOutput extends Component {
     });
   }
 
-  rowRenderer({ index, parent, key, style }) {
-    const { results } = this.state;
+  toggleEvent(isExpanded, id) {
+    const { parents, results } = this.state;
+    const parentIndex = parents.findIndex(parent => parent.id === id);
+    let collapsedParent = {
+      id: parents[parentIndex].id,
+      isExpanded: isExpanded,
+    };
+
+    const parentsToUpdate = [
+      ...parents.filter(parent => parent.id !== id),
+      collapsedParent,
+    ];
+
+    this.setState({ parents: parentsToUpdate });
+
+    // let newResults = Object.values(results).filter(nR => nR.parent_uuid !== id);
+
+    // const testfunction = (...results) => {
+    //   newResults.forEach(result => {
+    //     results[result.counter] = result;
+    //   });
+    //   delete results[0];
+    //   return { ...results };
+    // };
+    // const resultsToUpdate = testfunction(results);
+    // this.setState({
+    //   results: testfunction(results),
+    // });
+
+    this.listRef.forceUpdateGrid();
+  }
+
+  rowRenderer({ index, parent, key, style, isVisible }) {
+    const { results, parents } = this.state;
+    const EVENT_GROUPS = ['playbook_on_task_start', 'playbook_on_play_start'];
 
     const isHostEvent = jobEvent => {
       const { event, event_data, host, type } = jobEvent;
@@ -300,6 +336,82 @@ class JobOutput extends Component {
       return isHost;
     };
 
+
+    // GOAL:
+    // COLLAPSED - Return only parent line (jobEvent)
+    // EXPANDED - Return parent and children
+
+
+    // parents = [ { id: 'uuid', isExpanded: bool }]
+    const isParent = parents?.some(
+      parent => parent.id === results[index]?.uuid
+    );
+    const isParentEvent = lineIndex => {
+      let returnVal;
+      if (
+        EVENT_GROUPS.includes(results[index]?.event) &&
+        [0, 1, 2].includes(results[index]?.event_level) &&
+        lineIndex !== 0
+      ) {
+        if (!isParent) {
+          this.setState({
+            parents: parents.concat({
+              id: results[index].uuid,
+              isExpanded: true,
+            }),
+          });
+        }
+        returnVal = true;
+      } else {
+        returnVal = false;
+      }
+      return returnVal;
+    }
+
+    // lineNumber = start_line + index
+    // lineIndex = index
+    const canToggleEvent = (lineIndex) => {
+      let val;
+      if (isParentEvent(lineIndex)) {
+        val = true;
+      } else {
+        val = false;
+      }
+      return val;
+    }
+
+    let isVisibleParent =
+      parents.some(
+        parent => results[index]?.uuid === parent.id && parent.isExpanded
+      );
+    // console.log({results, parents, isParent, isVisibleParent})
+
+    let isJobExpanded = true;
+    // if job event has a parent that is not expanded
+    // and job event is not a parent
+    // then hide job event
+    if (
+      parents.some(
+        parent => results[index]?.parent_uuid === parent.id && !parent.isExpanded
+      ) &&
+      !isParent
+    ) {
+      console.log('out')
+      isJobExpanded = false;
+    }
+
+    // if job event has a parent that is expanded
+    // and job event is not a parent
+    // then show job event
+      if (
+        parents.some(
+          parent => results[index]?.parent_uuid === parent.id && parent.isExpanded
+      ) && !isParent
+      ){
+        console.log('in')
+        isJobExpanded = true
+      }
+
     return (
       <CellMeasurer
         key={key}
@@ -308,13 +420,17 @@ class JobOutput extends Component {
         rowIndex={index}
         columnIndex={0}
       >
-        {results[index] ? (
+        {isJobExpanded && (results[index] ? (
           <JobEvent
+            parents={parents}
             isClickable={isHostEvent(results[index])}
             onJobEventClick={() => this.handleHostEventClick(results[index])}
             className="row"
             style={style}
             {...results[index]}
+            canToggle={canToggleEvent}
+            isVisibleParent={isVisibleParent}
+            toggleEvent={this.toggleEvent}
           />
         ) : (
           <JobEventSkeleton
@@ -323,7 +439,9 @@ class JobOutput extends Component {
             counter={index}
             contentLength={80}
           />
-        )}
+        ))
+        }
+        {!isJobExpanded && null }
       </CellMeasurer>
     );
   }
@@ -394,6 +512,14 @@ class JobOutput extends Component {
     this._previousWidth = width;
   }
 
+  togglePage() {
+    const { parents } = this.state;
+    const toggledParents = parents.map(
+      parent => (parent = { ...parent, isExpanded: !parent.isExpanded })
+    );
+    this.setState({ parents: toggledParents });
+  }
+
   render() {
     const { job, i18n } = this.props;
 
@@ -404,6 +530,7 @@ class JobOutput extends Component {
       hostEvent,
       isHostModalOpen,
       remoteRowCount,
+      parents,
     } = this.state;
 
     if (hasContentLoading) {
@@ -436,6 +563,8 @@ class JobOutput extends Component {
           onScrollLast={this.handleScrollLast}
           onScrollNext={this.handleScrollNext}
           onScrollPrevious={this.handleScrollPrevious}
+          togglePage={this.togglePage}
+          isExpanded={parents.some(parent => parent.isExpanded)}
         />
         <OutputWrapper>
           <InfiniteLoader

@@ -1,7 +1,8 @@
 import Ansi from 'ansi-to-html';
 import hasAnsi from 'has-ansi';
+import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 import { AllHtmlEntities } from 'html-entities';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   JobEventLine,
   JobEventLineToggle,
@@ -13,7 +14,7 @@ const EVENT_START_TASK = 'playbook_on_task_start';
 const EVENT_START_PLAY = 'playbook_on_play_start';
 const EVENT_STATS_PLAY = 'playbook_on_stats';
 const TIME_EVENTS = [EVENT_START_TASK, EVENT_START_PLAY, EVENT_STATS_PLAY];
-
+const EVENT_GROUPS = [EVENT_START_TASK, EVENT_START_PLAY];
 const ansi = new Ansi({
   stream: true,
   colors: {
@@ -65,10 +66,10 @@ function getLineTextHtml({ created, event, start_line, stdout }) {
       const time = getTimestamp({ created });
       html += `<span class="time">${time}</span>`;
     }
-
     return {
       lineNumber: start_line + index,
       html,
+      index,
     };
   });
 }
@@ -83,11 +84,16 @@ function JobEvent({
   start_line,
   style,
   type,
+  uuid,
+  canToggle,
+  toggleEvent,
+  isVisibleParent,
+  isJobExpanded
 }) {
   return !stdout ? null : (
     <div style={style} type={type}>
       {getLineTextHtml({ created, event, start_line, stdout }).map(
-        ({ lineNumber, html }) =>
+        ({ lineNumber, html, index }) =>
           lineNumber >= 0 && (
             <JobEventLine
               onClick={isClickable ? onJobEventClick : undefined}
@@ -95,7 +101,22 @@ function JobEvent({
               isFirst={lineNumber === 0}
               isClickable={isClickable}
             >
-              <JobEventLineToggle />
+              <JobEventLineToggle>
+                {canToggle(index) && isVisibleParent && (
+                  <AngleDownIcon
+                    onClick={() => {
+                      toggleEvent(false, uuid);
+                    }}
+                  />
+                )}
+                {canToggle(index) && !isVisibleParent && (
+                  <AngleRightIcon
+                    onClick={() => {
+                      toggleEvent(true, uuid);
+                    }}
+                  />
+                )}
+              </JobEventLineToggle>
               <JobEventLineNumber>{lineNumber}</JobEventLineNumber>
               <JobEventLineText
                 type="job_event_line_text"
