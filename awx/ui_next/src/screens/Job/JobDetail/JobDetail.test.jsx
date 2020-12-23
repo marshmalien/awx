@@ -35,6 +35,10 @@ describe('<JobDetail />', () => {
               kubernetes: false,
               credential_type_id: 1,
             },
+            source_workflow_job: {
+              id: 999,
+              name: 'mock workflow job',
+            },
           },
         }}
       />
@@ -64,6 +68,7 @@ describe('<JobDetail />', () => {
     assertDetail('Job Slice', '0/1');
     assertDetail('Credentials', 'SSH: Demo Credential');
     assertDetail('Machine Credential', 'SSH: Machine cred');
+    assertDetail('Source Workflow Job', 'mock workflow job');
 
     const credentialChip = wrapper.find(
       `Detail[label="Credentials"] CredentialChip`
