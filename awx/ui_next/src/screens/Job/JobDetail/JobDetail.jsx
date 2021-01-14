@@ -53,7 +53,6 @@ const VERBOSITY = {
   3: '3 (Debug)',
   4: '4 (Connection Debug)',
 };
-
 function JobDetail({ job, i18n }) {
   const {
     created_by,
